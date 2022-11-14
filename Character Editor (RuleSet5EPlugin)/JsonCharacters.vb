@@ -1,11 +1,12 @@
-﻿Imports Newtonsoft.Json
+﻿Imports System.ComponentModel
+Imports Newtonsoft.Json
 
 Namespace XJ
     Partial Public Class RuleSet5ECharacterEditor
         Public Class Character
             Public Property NPC As Boolean = False
             Public Property reach As Integer = 5
-            Public Property attacks As List(Of Roll) = New List(Of Roll)()            '
+            Public Property attacks As List(Of Roll) = New List(Of Roll)()
             Public Property attacksDC As List(Of Roll) = New List(Of Roll)()
             Public Property saves As List(Of Roll) = New List(Of Roll)()
             Public Property skills As List(Of Roll) = New List(Of Roll)()
@@ -28,11 +29,17 @@ Namespace XJ
         Public Class Roll
             Public Property name As String = ""
             Public Property type As String = ""
-            Public Property roll As String = ""
-            Public Property critrangemin As String = "20"
-            Public Property critmultip As String = "2"
-            Public Property range As String = "5/5"
+            Public Property roll As String = "100"
+            <DefaultValue("")>
+            Public Property critrangemin As String = ""
+            <DefaultValue("")>
+            Public Property critmultip As String = ""
+            <DefaultValue("")>
+            Public Property range As String = ""
+            <DefaultValue("")>
             Public Property info As String = ""
+            <DefaultValue("")>
+            Public Property futureUse_icon As String = ""
             Public Property link As Roll = Nothing
 
             Public Sub New()
