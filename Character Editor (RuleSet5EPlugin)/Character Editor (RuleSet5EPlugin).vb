@@ -1160,8 +1160,9 @@ Public Class Form1
                 End If
 
             End If
+            actualizarJsonText()
         Catch ex As Exception
-
+            MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
     End Sub
 
@@ -1176,6 +1177,7 @@ Public Class Form1
             For Each roll In chara.skills
                 lb_Skill.Items.Add(roll.name)
             Next
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1193,7 +1195,7 @@ Public Class Form1
             Else
                 MsgBox("There is no item selected in the list", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
             End If
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1213,7 +1215,7 @@ Public Class Form1
             For Each roll In chara.attacks
                 lb_Attacks.Items.Add(roll.name)
             Next
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1234,7 +1236,7 @@ Public Class Form1
                 lb_DCAttacks.Items.Add(roll.name)
             Next
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1253,7 +1255,7 @@ Public Class Form1
                 lb_Heals.Items.Add(roll.name)
             Next
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1271,7 +1273,7 @@ Public Class Form1
                 lb_Saves.Items.Add(roll.name)
             Next
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1292,7 +1294,7 @@ Public Class Form1
                 MsgBox("There is no item selected in the list", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
             End If
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1314,7 +1316,7 @@ Public Class Form1
                 MsgBox("There is no item selected in the list", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
             End If
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1333,7 +1335,7 @@ Public Class Form1
                 MsgBox("There is no item selected in the list")
             End If
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1352,7 +1354,7 @@ Public Class Form1
                 MsgBox("There is no item selected in the list", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
             End If
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1439,7 +1441,7 @@ Public Class Form1
 
             ' chara.healing.Add(baseroll)
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1536,6 +1538,7 @@ Public Class Form1
             Else
                 MsgBox("There is no item selected in the list")
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -2001,13 +2004,10 @@ Public Class Form1
             'Else
             '    MsgBox("The file does not exist", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
             'End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
-    End Sub
-
-    Private Sub l_creaturename_Click(sender As Object, e As EventArgs) Handles l_creaturename.Click
-
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles b_addc.Click
@@ -2041,6 +2041,7 @@ Public Class Form1
                     Next
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -2055,7 +2056,7 @@ Public Class Form1
             Dim fichero As String
             Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
             Dim dt_principal As New DataTable
-            dlAbrir.Filter = "File Dnd5e (*.json)|*.json|" & "Todos los archivos (*.*)|*.*"
+            dlAbrir.Filter = "File Dnd5e (*.spell)|*.spell|" & "Todos los archivos (*.*)|*.*"
             dlAbrir.Multiselect = False
             dlAbrir.CheckFileExists = False
             dlAbrir.Title = "Select File"
@@ -2076,6 +2077,7 @@ Public Class Form1
                     Next
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -2114,7 +2116,7 @@ Public Class Form1
             Dim fichero As String
             Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
             Dim dt_principal As New DataTable
-            dlAbrir.Filter = "File Dnd5e (*.json)|*.json|" & "Todos los archivos (*.*)|*.*"
+            dlAbrir.Filter = "File Dnd5e (*.spell)|*.spell|" & "Todos los archivos (*.*)|*.*"
             dlAbrir.Multiselect = False
             dlAbrir.CheckFileExists = False
             dlAbrir.Title = "Select File"
@@ -2135,6 +2137,7 @@ Public Class Form1
                     Next
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
