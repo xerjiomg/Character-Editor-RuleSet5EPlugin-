@@ -1793,7 +1793,7 @@ Public Class Form1
             alllists.Add(lb_Skill)
             alllists.Add(lb_Heals)
             alllists.Add(lb_Saves)
-            b_addc.BackColor = Color.LightGray
+            ''b_addc.BackColor = Color.LightGray
             b_addat.BackColor = Color.LightGray
             b_adheal.BackColor = Color.LightGray
         Catch ex As Exception
@@ -2017,41 +2017,41 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles b_addc.Click
-        Try
-            Dim txtFichero As String = ""
-            'Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
-            Dim spell As List(Of Roll) = New List(Of Roll)()
-            Dim fichero As String
-            Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
-            Dim dt_principal As New DataTable
-            dlAbrir.Filter = "File Dnd5e (*.spell)|*.spell|" & "Todos los archivos (*.*)|*.*"
-            dlAbrir.Multiselect = False
-            dlAbrir.CheckFileExists = False
-            dlAbrir.Title = "Select File"
-            dlAbrir.ShowDialog()
-            If dlAbrir.FileName <> "" And System.IO.File.Exists(dlAbrir.FileName) Then
-                fichero = dlAbrir.FileName
-                txtFichero = File.ReadAllText(fichero)
-                If txtFichero <> "" Then
-                    spell = Nothing
-                    spell = JsonConvert.DeserializeObject(Of List(Of Roll))(txtFichero)
-                    For Each sp As Roll In spell
-                        If sp.roll <> "100" Then
-                            sp.roll = "8" + sp.roll
-                        End If
-                        chara.attacksDC.Add(sp)
-                        lb_DCAttacks.Items.Clear()
-                        For Each roll In chara.attacksDC
-                            lb_DCAttacks.Items.Add(roll.name)
-                        Next
-                    Next
-                End If
-            End If
-            actualizarJsonText()
-        Catch ex As Exception
-            MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
-        End Try
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
+        'Try
+        '    Dim txtFichero As String = ""
+        '    'Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
+        '    Dim spell As List(Of Roll) = New List(Of Roll)()
+        '    Dim fichero As String
+        '    Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
+        '    Dim dt_principal As New DataTable
+        '    dlAbrir.Filter = "File Dnd5e (*.spell)|*.spell|" & "Todos los archivos (*.*)|*.*"
+        '    dlAbrir.Multiselect = False
+        '    dlAbrir.CheckFileExists = False
+        '    dlAbrir.Title = "Select File"
+        '    dlAbrir.ShowDialog()
+        '    If dlAbrir.FileName <> "" And System.IO.File.Exists(dlAbrir.FileName) Then
+        '        fichero = dlAbrir.FileName
+        '        txtFichero = File.ReadAllText(fichero)
+        '        If txtFichero <> "" Then
+        '            spell = Nothing
+        '            spell = JsonConvert.DeserializeObject(Of List(Of Roll))(txtFichero)
+        '            For Each sp As Roll In spell
+        '                If sp.roll <> "100" Then
+        '                    sp.roll = "8" + sp.roll
+        '                End If
+        '                chara.attacksDC.Add(sp)
+        '                lb_DCAttacks.Items.Clear()
+        '                For Each roll In chara.attacksDC
+        '                    lb_DCAttacks.Items.Add(roll.name)
+        '                Next
+        '            Next
+        '        End If
+        '    End If
+        '    actualizarJsonText()
+        'Catch ex As Exception
+        '    MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
+        'End Try
     End Sub
 
 
@@ -2076,10 +2076,18 @@ Public Class Form1
 
                     spell = JsonConvert.DeserializeObject(Of List(Of Roll))(txtFichero)
                     For Each sp As Roll In spell
-                        chara.attacks.Add(sp)
+                        If sp.name.Contains("/") Or sp.name.Contains("100") Then
+                            chara.attacksDC.Add(sp)
+                        Else
+                            chara.attacks.Add(sp)
+                        End If
                         lb_Attacks.Items.Clear()
+                        lb_DCAttacks.Items.Clear()
                         For Each roll In chara.attacks
                             lb_Attacks.Items.Add(roll.name)
+                        Next
+                        For Each roll In chara.attacksDC
+                            lb_DCAttacks.Items.Add(roll.name)
                         Next
                     Next
                 End If
@@ -2093,17 +2101,17 @@ Public Class Form1
     Private Sub l_creaturename_TextChanged(sender As Object, e As EventArgs) Handles l_creaturename.TextChanged
         Try
             If l_creaturename.Text = "" Then
-                b_addc.Enabled = False
+                '' b_addc.Enabled = False
                 b_addat.Enabled = False
                 b_adheal.Enabled = False
-                b_addc.BackColor = Color.LightGray
+                ''b_addc.BackColor = Color.LightGray
                 b_addat.BackColor = Color.LightGray
                 b_adheal.BackColor = Color.LightGray
             Else
-                b_addc.Enabled = True
+                ''b_addc.Enabled = True
                 b_addat.Enabled = True
                 b_adheal.Enabled = True
-                b_addc.BackColor = Color.Transparent
+                ''b_addc.BackColor = Color.Transparent
                 b_addat.BackColor = Color.Transparent
                 b_adheal.BackColor = Color.Transparent
             End If

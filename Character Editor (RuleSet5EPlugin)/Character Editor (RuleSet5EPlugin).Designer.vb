@@ -38,6 +38,7 @@ Partial Class Form1
         Me.c_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.n_Value = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panel_resi = New System.Windows.Forms.Panel()
+        Me.cb_immu_Critical = New System.Windows.Forms.CheckBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -166,10 +167,8 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.b_adheal = New System.Windows.Forms.Button()
         Me.b_addat = New System.Windows.Forms.Button()
-        Me.b_addc = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.cb_immu_Critical = New System.Windows.Forms.CheckBox()
         CType(Me.dg_Principal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_resi.SuspendLayout()
         CType(Me.dg_Damages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -343,6 +342,15 @@ Partial Class Form1
         Me.panel_resi.Name = "panel_resi"
         Me.panel_resi.Size = New System.Drawing.Size(317, 407)
         Me.panel_resi.TabIndex = 3
+        '
+        'cb_immu_Critical
+        '
+        Me.cb_immu_Critical.AutoSize = True
+        Me.cb_immu_Critical.Location = New System.Drawing.Point(178, 391)
+        Me.cb_immu_Critical.Name = "cb_immu_Critical"
+        Me.cb_immu_Critical.Size = New System.Drawing.Size(15, 14)
+        Me.cb_immu_Critical.TabIndex = 77
+        Me.cb_immu_Critical.UseVisualStyleBackColor = True
         '
         'Label16
         '
@@ -1666,7 +1674,6 @@ Partial Class Form1
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.b_adheal)
         Me.Panel1.Controls.Add(Me.b_addat)
-        Me.Panel1.Controls.Add(Me.b_addc)
         Me.Panel1.Controls.Add(Me.Label15)
         Me.Panel1.Location = New System.Drawing.Point(7, 354)
         Me.Panel1.Name = "Panel1"
@@ -1677,9 +1684,9 @@ Partial Class Form1
         '
         Me.b_adheal.Enabled = False
         Me.b_adheal.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.b_adheal.Location = New System.Drawing.Point(110, 20)
+        Me.b_adheal.Location = New System.Drawing.Point(90, 20)
         Me.b_adheal.Name = "b_adheal"
-        Me.b_adheal.Size = New System.Drawing.Size(46, 23)
+        Me.b_adheal.Size = New System.Drawing.Size(66, 23)
         Me.b_adheal.TabIndex = 69
         Me.b_adheal.Text = "Heal"
         Me.b_adheal.UseVisualStyleBackColor = True
@@ -1690,21 +1697,10 @@ Partial Class Form1
         Me.b_addat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.b_addat.Location = New System.Drawing.Point(2, 20)
         Me.b_addat.Name = "b_addat"
-        Me.b_addat.Size = New System.Drawing.Size(63, 23)
+        Me.b_addat.Size = New System.Drawing.Size(82, 23)
         Me.b_addat.TabIndex = 67
         Me.b_addat.Text = "Attacks"
         Me.b_addat.UseVisualStyleBackColor = True
-        '
-        'b_addc
-        '
-        Me.b_addc.Enabled = False
-        Me.b_addc.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.b_addc.Location = New System.Drawing.Point(69, 20)
-        Me.b_addc.Name = "b_addc"
-        Me.b_addc.Size = New System.Drawing.Size(38, 23)
-        Me.b_addc.TabIndex = 66
-        Me.b_addc.Text = "DC"
-        Me.b_addc.UseVisualStyleBackColor = True
         '
         'Label15
         '
@@ -1725,15 +1721,6 @@ Partial Class Form1
         Me.Button4.TabIndex = 65
         Me.Button4.Text = "New"
         Me.Button4.UseVisualStyleBackColor = True
-        '
-        'cb_immu_Critical
-        '
-        Me.cb_immu_Critical.AutoSize = True
-        Me.cb_immu_Critical.Location = New System.Drawing.Point(178, 391)
-        Me.cb_immu_Critical.Name = "cb_immu_Critical"
-        Me.cb_immu_Critical.Size = New System.Drawing.Size(15, 14)
-        Me.cb_immu_Critical.TabIndex = 77
-        Me.cb_immu_Critical.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -1899,7 +1886,6 @@ Partial Class Form1
     Friend WithEvents Label14 As Label
     Friend WithEvents Panelbase As Panel
     Friend WithEvents Button4 As Button
-    Friend WithEvents b_addc As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents b_addat As Button
     Friend WithEvents Label15 As Label
