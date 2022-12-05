@@ -204,6 +204,9 @@ Public Class Form1
                     If im_string.ToLower = "magic slashing" Then
                         cb_immu_Magic0Slashing.Checked = True
                     End If
+                    If im_string.ToLower = "critical" Then
+                        cb_immu_Critical.Checked = True
+                    End If
                 Next
                 For Each im_string In chara.vulnerability
                     If im_string.ToLower = "bludgeoning" Then
@@ -1083,7 +1086,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ComboResiCheck(sender As Object, e As EventArgs) Handles cb_vulne_Thunder.CheckedChanged, cb_vulne_Slashing.CheckedChanged, cb_vulne_Radiant.CheckedChanged, cb_vulne_Psychic.CheckedChanged, cb_vulne_Poison.CheckedChanged, cb_vulne_Piercing.CheckedChanged, cb_vulne_Necrotic.CheckedChanged, cb_vulne_Lightning.CheckedChanged, cb_vulne_Force.CheckedChanged, cb_vulne_Fire.CheckedChanged, cb_vulne_Cold.CheckedChanged, cb_vulne_Bludgeoning.CheckedChanged, cb_vulne_Acid.CheckedChanged, cb_resist_Thunder.CheckedChanged, cb_resist_Slashing.CheckedChanged, cb_resist_Radiant.CheckedChanged, cb_resist_Psychic.CheckedChanged, cb_resist_Poison.CheckedChanged, cb_resist_Piercing.CheckedChanged, cb_resist_Necrotic.CheckedChanged, cb_resist_Lightning.CheckedChanged, cb_resist_Force.CheckedChanged, cb_resist_Fire.CheckedChanged, cb_resist_Cold.CheckedChanged, cb_resist_Bludgeoning.CheckedChanged, cb_resist_Acid.CheckedChanged, cb_immu_Thunder.CheckedChanged, cb_immu_Slashing.CheckedChanged, cb_immu_Radiant.CheckedChanged, cb_immu_Psychic.CheckedChanged, cb_immu_Poison.CheckedChanged, cb_immu_Piercing.CheckedChanged, cb_immu_Necrotic.CheckedChanged, cb_immu_Lightning.CheckedChanged, cb_immu_Force.CheckedChanged, cb_immu_Fire.CheckedChanged, cb_immu_Cold.CheckedChanged, cb_immu_Bludgeoning.CheckedChanged, cb_immu_Acid.CheckedChanged, cb_resist_Magic0Bludgeoning.CheckedChanged, cb_resist_Magic0Slashing.CheckedChanged, cb_resist_Magic0Slashing.CheckedChanged, cb_immu_Magic0Bludgeoning.CheckedChanged, cb_immu_Magic0Piercing.CheckedChanged, cb_immu_Magic0Slashing.CheckedChanged, cb_vulne_Magic0Bludgeoning.CheckedChanged, cb_vulne_Magic0Piercing.CheckedChanged, cb_vulne_Magic0Slashing.CheckedChanged
+    Private Sub ComboResiCheck(sender As Object, e As EventArgs) Handles cb_vulne_Thunder.CheckedChanged, cb_vulne_Slashing.CheckedChanged, cb_vulne_Radiant.CheckedChanged, cb_vulne_Psychic.CheckedChanged, cb_vulne_Poison.CheckedChanged, cb_vulne_Piercing.CheckedChanged, cb_vulne_Necrotic.CheckedChanged, cb_vulne_Lightning.CheckedChanged, cb_vulne_Force.CheckedChanged, cb_vulne_Fire.CheckedChanged, cb_vulne_Cold.CheckedChanged, cb_vulne_Bludgeoning.CheckedChanged, cb_vulne_Acid.CheckedChanged, cb_resist_Thunder.CheckedChanged, cb_resist_Slashing.CheckedChanged, cb_resist_Radiant.CheckedChanged, cb_resist_Psychic.CheckedChanged, cb_resist_Poison.CheckedChanged, cb_resist_Piercing.CheckedChanged, cb_resist_Necrotic.CheckedChanged, cb_resist_Lightning.CheckedChanged, cb_resist_Force.CheckedChanged, cb_resist_Fire.CheckedChanged, cb_resist_Cold.CheckedChanged, cb_resist_Bludgeoning.CheckedChanged, cb_resist_Acid.CheckedChanged, cb_immu_Thunder.CheckedChanged, cb_immu_Slashing.CheckedChanged, cb_immu_Radiant.CheckedChanged, cb_immu_Psychic.CheckedChanged, cb_immu_Poison.CheckedChanged, cb_immu_Piercing.CheckedChanged, cb_immu_Necrotic.CheckedChanged, cb_immu_Lightning.CheckedChanged, cb_immu_Force.CheckedChanged, cb_immu_Fire.CheckedChanged, cb_immu_Cold.CheckedChanged, cb_immu_Bludgeoning.CheckedChanged, cb_immu_Acid.CheckedChanged, cb_resist_Magic0Bludgeoning.CheckedChanged, cb_resist_Magic0Slashing.CheckedChanged, cb_resist_Magic0Slashing.CheckedChanged, cb_immu_Magic0Bludgeoning.CheckedChanged, cb_immu_Magic0Piercing.CheckedChanged, cb_immu_Magic0Slashing.CheckedChanged, cb_vulne_Magic0Bludgeoning.CheckedChanged, cb_vulne_Magic0Piercing.CheckedChanged, cb_vulne_Magic0Slashing.CheckedChanged, cb_immu_Critical.CheckedChanged
         Try
 
             If b_checkedchanges = True Then
@@ -1931,6 +1934,9 @@ Public Class Form1
                     If im_string.ToLower = "magic slashing" Then
                         cb_immu_Magic0Slashing.Checked = True
                     End If
+                    If im_string.ToLower = "critical" Then
+                        cb_immu_Critical.Checked = True
+                    End If
                 Next
                 For Each im_string In chara.vulnerability
                     If im_string.ToLower = "bludgeoning" Then
@@ -1981,6 +1987,7 @@ Public Class Form1
                     If im_string.ToLower = "magic slashing" Then
                         cb_vulne_Magic0Slashing.Checked = True
                     End If
+
                 Next
 
                 b_checkedchanges = True
@@ -2142,6 +2149,4 @@ Public Class Form1
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
     End Sub
-
-
 End Class

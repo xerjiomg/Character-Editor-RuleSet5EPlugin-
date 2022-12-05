@@ -4,16 +4,9 @@ Imports Newtonsoft.Json
 Namespace XJ
     Partial Public Class RuleSet5ECharacterEditor
         Public Class Character
+            <DefaultValue("")>
             Public Property NPC As Boolean = False
             Public Property reach As Integer = 5
-            Public Property attacks As List(Of Roll) = New List(Of Roll)()
-            Public Property attacksDC As List(Of Roll) = New List(Of Roll)()
-            Public Property saves As List(Of Roll) = New List(Of Roll)()
-            Public Property skills As List(Of Roll) = New List(Of Roll)()
-            Public Property healing As List(Of Roll) = New List(Of Roll)()
-            Public Property resistance As List(Of String) = New List(Of String)()
-            Public Property vulnerability As List(Of String) = New List(Of String)()
-            Public Property immunity As List(Of String) = New List(Of String)()
             Public Property ac As String = "8"
             Public Property hp As String = "10"
             Public Property str As String = "10"
@@ -23,6 +16,15 @@ Namespace XJ
             Public Property wis As String = "10"
             Public Property cha As String = "10"
             Public Property speed As String = "30"
+            Public Property attacks As List(Of Roll) = New List(Of Roll)()
+            Public Property attacksDC As List(Of Roll) = New List(Of Roll)()
+            Public Property saves As List(Of Roll) = New List(Of Roll)()
+            Public Property skills As List(Of Roll) = New List(Of Roll)()
+            Public Property healing As List(Of Roll) = New List(Of Roll)()
+            Public Property resistance As List(Of String) = New List(Of String)()
+            Public Property vulnerability As List(Of String) = New List(Of String)()
+            Public Property immunity As List(Of String) = New List(Of String)()
+
 
         End Class
 

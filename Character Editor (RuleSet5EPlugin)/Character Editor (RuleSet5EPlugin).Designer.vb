@@ -38,6 +38,7 @@ Partial Class Form1
         Me.c_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.n_Value = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panel_resi = New System.Windows.Forms.Panel()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
@@ -168,6 +169,7 @@ Partial Class Form1
         Me.b_addc = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.cb_immu_Critical = New System.Windows.Forms.CheckBox()
         CType(Me.dg_Principal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_resi.SuspendLayout()
         CType(Me.dg_Damages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -258,6 +260,8 @@ Partial Class Form1
         '
         'panel_resi
         '
+        Me.panel_resi.Controls.Add(Me.cb_immu_Critical)
+        Me.panel_resi.Controls.Add(Me.Label16)
         Me.panel_resi.Controls.Add(Me.Label30)
         Me.panel_resi.Controls.Add(Me.Label20)
         Me.panel_resi.Controls.Add(Me.Label31)
@@ -340,11 +344,21 @@ Partial Class Form1
         Me.panel_resi.Size = New System.Drawing.Size(317, 407)
         Me.panel_resi.TabIndex = 3
         '
+        'Label16
+        '
+        Me.Label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label16.Location = New System.Drawing.Point(3, 389)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(309, 18)
+        Me.Label16.TabIndex = 76
+        Me.Label16.Text = "Critical Immunity:                      "
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Label30
         '
         Me.Label30.AutoSize = True
         Me.Label30.BackColor = System.Drawing.Color.Transparent
-        Me.Label30.Location = New System.Drawing.Point(228, 322)
+        Me.Label30.Location = New System.Drawing.Point(228, 308)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(73, 15)
         Me.Label30.TabIndex = 75
@@ -355,7 +369,7 @@ Partial Class Form1
         '
         Me.Label20.AutoSize = True
         Me.Label20.BackColor = System.Drawing.Color.Transparent
-        Me.Label20.Location = New System.Drawing.Point(228, 97)
+        Me.Label20.Location = New System.Drawing.Point(229, 91)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(73, 15)
         Me.Label20.TabIndex = 75
@@ -366,7 +380,7 @@ Partial Class Form1
         '
         Me.Label31.AutoSize = True
         Me.Label31.BackColor = System.Drawing.Color.Transparent
-        Me.Label31.Location = New System.Drawing.Point(157, 322)
+        Me.Label31.Location = New System.Drawing.Point(157, 308)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(59, 15)
         Me.Label31.TabIndex = 74
@@ -377,7 +391,7 @@ Partial Class Form1
         '
         Me.Label28.AutoSize = True
         Me.Label28.BackColor = System.Drawing.Color.Transparent
-        Me.Label28.Location = New System.Drawing.Point(157, 97)
+        Me.Label28.Location = New System.Drawing.Point(158, 91)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(59, 15)
         Me.Label28.TabIndex = 74
@@ -388,7 +402,7 @@ Partial Class Form1
         '
         Me.Label32.AutoSize = True
         Me.Label32.BackColor = System.Drawing.Color.Transparent
-        Me.Label32.Location = New System.Drawing.Point(83, 322)
+        Me.Label32.Location = New System.Drawing.Point(83, 308)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(62, 15)
         Me.Label32.TabIndex = 73
@@ -398,7 +412,7 @@ Partial Class Form1
         '
         Me.Label29.AutoSize = True
         Me.Label29.BackColor = System.Drawing.Color.Transparent
-        Me.Label29.Location = New System.Drawing.Point(83, 97)
+        Me.Label29.Location = New System.Drawing.Point(84, 91)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(62, 15)
         Me.Label29.TabIndex = 73
@@ -448,7 +462,7 @@ Partial Class Form1
         'Label21
         '
         Me.Label21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label21.Location = New System.Drawing.Point(4, 96)
+        Me.Label21.Location = New System.Drawing.Point(5, 90)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(309, 18)
         Me.Label21.TabIndex = 68
@@ -457,7 +471,7 @@ Partial Class Form1
         'Label26
         '
         Me.Label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label26.Location = New System.Drawing.Point(4, 321)
+        Me.Label26.Location = New System.Drawing.Point(4, 307)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(309, 18)
         Me.Label26.TabIndex = 67
@@ -466,7 +480,7 @@ Partial Class Form1
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(27, 383)
+        Me.Label25.Location = New System.Drawing.Point(27, 369)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(54, 15)
         Me.Label25.TabIndex = 66
@@ -476,7 +490,7 @@ Partial Class Form1
         'cb_vulne_Magic0Slashing
         '
         Me.cb_vulne_Magic0Slashing.AutoSize = True
-        Me.cb_vulne_Magic0Slashing.Location = New System.Drawing.Point(257, 382)
+        Me.cb_vulne_Magic0Slashing.Location = New System.Drawing.Point(257, 368)
         Me.cb_vulne_Magic0Slashing.Name = "cb_vulne_Magic0Slashing"
         Me.cb_vulne_Magic0Slashing.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Magic0Slashing.TabIndex = 65
@@ -485,7 +499,7 @@ Partial Class Form1
         'cb_immu_Magic0Slashing
         '
         Me.cb_immu_Magic0Slashing.AutoSize = True
-        Me.cb_immu_Magic0Slashing.Location = New System.Drawing.Point(178, 382)
+        Me.cb_immu_Magic0Slashing.Location = New System.Drawing.Point(178, 368)
         Me.cb_immu_Magic0Slashing.Name = "cb_immu_Magic0Slashing"
         Me.cb_immu_Magic0Slashing.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Magic0Slashing.TabIndex = 64
@@ -494,7 +508,7 @@ Partial Class Form1
         'cb_resist_Magic0Slashing
         '
         Me.cb_resist_Magic0Slashing.AutoSize = True
-        Me.cb_resist_Magic0Slashing.Location = New System.Drawing.Point(108, 383)
+        Me.cb_resist_Magic0Slashing.Location = New System.Drawing.Point(108, 369)
         Me.cb_resist_Magic0Slashing.Name = "cb_resist_Magic0Slashing"
         Me.cb_resist_Magic0Slashing.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Magic0Slashing.TabIndex = 63
@@ -503,7 +517,7 @@ Partial Class Form1
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(26, 363)
+        Me.Label24.Location = New System.Drawing.Point(26, 349)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(53, 15)
         Me.Label24.TabIndex = 62
@@ -513,7 +527,7 @@ Partial Class Form1
         'cb_vulne_Magic0Piercing
         '
         Me.cb_vulne_Magic0Piercing.AutoSize = True
-        Me.cb_vulne_Magic0Piercing.Location = New System.Drawing.Point(257, 362)
+        Me.cb_vulne_Magic0Piercing.Location = New System.Drawing.Point(257, 348)
         Me.cb_vulne_Magic0Piercing.Name = "cb_vulne_Magic0Piercing"
         Me.cb_vulne_Magic0Piercing.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Magic0Piercing.TabIndex = 61
@@ -522,7 +536,7 @@ Partial Class Form1
         'cb_immu_Magic0Piercing
         '
         Me.cb_immu_Magic0Piercing.AutoSize = True
-        Me.cb_immu_Magic0Piercing.Location = New System.Drawing.Point(178, 362)
+        Me.cb_immu_Magic0Piercing.Location = New System.Drawing.Point(178, 348)
         Me.cb_immu_Magic0Piercing.Name = "cb_immu_Magic0Piercing"
         Me.cb_immu_Magic0Piercing.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Magic0Piercing.TabIndex = 60
@@ -531,7 +545,7 @@ Partial Class Form1
         'cb_resist_Magic0Piercing
         '
         Me.cb_resist_Magic0Piercing.AutoSize = True
-        Me.cb_resist_Magic0Piercing.Location = New System.Drawing.Point(108, 363)
+        Me.cb_resist_Magic0Piercing.Location = New System.Drawing.Point(108, 349)
         Me.cb_resist_Magic0Piercing.Name = "cb_resist_Magic0Piercing"
         Me.cb_resist_Magic0Piercing.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Magic0Piercing.TabIndex = 59
@@ -540,7 +554,7 @@ Partial Class Form1
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(4, 343)
+        Me.Label23.Location = New System.Drawing.Point(4, 329)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(78, 15)
         Me.Label23.TabIndex = 58
@@ -550,7 +564,7 @@ Partial Class Form1
         'cb_vulne_Magic0Bludgeoning
         '
         Me.cb_vulne_Magic0Bludgeoning.AutoSize = True
-        Me.cb_vulne_Magic0Bludgeoning.Location = New System.Drawing.Point(257, 342)
+        Me.cb_vulne_Magic0Bludgeoning.Location = New System.Drawing.Point(257, 328)
         Me.cb_vulne_Magic0Bludgeoning.Name = "cb_vulne_Magic0Bludgeoning"
         Me.cb_vulne_Magic0Bludgeoning.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Magic0Bludgeoning.TabIndex = 57
@@ -559,7 +573,7 @@ Partial Class Form1
         'cb_immu_Magic0Bludgeoning
         '
         Me.cb_immu_Magic0Bludgeoning.AutoSize = True
-        Me.cb_immu_Magic0Bludgeoning.Location = New System.Drawing.Point(178, 342)
+        Me.cb_immu_Magic0Bludgeoning.Location = New System.Drawing.Point(178, 328)
         Me.cb_immu_Magic0Bludgeoning.Name = "cb_immu_Magic0Bludgeoning"
         Me.cb_immu_Magic0Bludgeoning.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Magic0Bludgeoning.TabIndex = 56
@@ -568,7 +582,7 @@ Partial Class Form1
         'cb_resist_Magic0Bludgeoning
         '
         Me.cb_resist_Magic0Bludgeoning.AutoSize = True
-        Me.cb_resist_Magic0Bludgeoning.Location = New System.Drawing.Point(108, 343)
+        Me.cb_resist_Magic0Bludgeoning.Location = New System.Drawing.Point(108, 329)
         Me.cb_resist_Magic0Bludgeoning.Name = "cb_resist_Magic0Bludgeoning"
         Me.cb_resist_Magic0Bludgeoning.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Magic0Bludgeoning.TabIndex = 55
@@ -577,7 +591,7 @@ Partial Class Form1
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(27, 297)
+        Me.Label13.Location = New System.Drawing.Point(27, 290)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(54, 15)
         Me.Label13.TabIndex = 51
@@ -587,7 +601,7 @@ Partial Class Form1
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(31, 277)
+        Me.Label12.Location = New System.Drawing.Point(31, 270)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(50, 15)
         Me.Label12.TabIndex = 50
@@ -597,7 +611,7 @@ Partial Class Form1
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(31, 257)
+        Me.Label11.Location = New System.Drawing.Point(31, 250)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(50, 15)
         Me.Label11.TabIndex = 49
@@ -607,7 +621,7 @@ Partial Class Form1
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(35, 237)
+        Me.Label10.Location = New System.Drawing.Point(35, 230)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(46, 15)
         Me.Label10.TabIndex = 48
@@ -617,7 +631,7 @@ Partial Class Form1
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(26, 217)
+        Me.Label9.Location = New System.Drawing.Point(26, 210)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(55, 15)
         Me.Label9.TabIndex = 47
@@ -627,7 +641,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(20, 197)
+        Me.Label8.Location = New System.Drawing.Point(20, 190)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(61, 15)
         Me.Label8.TabIndex = 46
@@ -637,7 +651,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(42, 177)
+        Me.Label7.Location = New System.Drawing.Point(42, 170)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(39, 15)
         Me.Label7.TabIndex = 45
@@ -647,7 +661,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(52, 157)
+        Me.Label6.Location = New System.Drawing.Point(52, 150)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(29, 15)
         Me.Label6.TabIndex = 44
@@ -657,7 +671,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(46, 137)
+        Me.Label5.Location = New System.Drawing.Point(46, 130)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(35, 15)
         Me.Label5.TabIndex = 43
@@ -667,7 +681,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(47, 117)
+        Me.Label4.Location = New System.Drawing.Point(47, 110)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(34, 15)
         Me.Label4.TabIndex = 42
@@ -707,7 +721,7 @@ Partial Class Form1
         'cb_vulne_Thunder
         '
         Me.cb_vulne_Thunder.AutoSize = True
-        Me.cb_vulne_Thunder.Location = New System.Drawing.Point(257, 296)
+        Me.cb_vulne_Thunder.Location = New System.Drawing.Point(257, 289)
         Me.cb_vulne_Thunder.Name = "cb_vulne_Thunder"
         Me.cb_vulne_Thunder.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Thunder.TabIndex = 38
@@ -716,7 +730,7 @@ Partial Class Form1
         'cb_vulne_Radiant
         '
         Me.cb_vulne_Radiant.AutoSize = True
-        Me.cb_vulne_Radiant.Location = New System.Drawing.Point(257, 276)
+        Me.cb_vulne_Radiant.Location = New System.Drawing.Point(257, 269)
         Me.cb_vulne_Radiant.Name = "cb_vulne_Radiant"
         Me.cb_vulne_Radiant.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Radiant.TabIndex = 37
@@ -725,7 +739,7 @@ Partial Class Form1
         'cb_vulne_Psychic
         '
         Me.cb_vulne_Psychic.AutoSize = True
-        Me.cb_vulne_Psychic.Location = New System.Drawing.Point(257, 256)
+        Me.cb_vulne_Psychic.Location = New System.Drawing.Point(257, 249)
         Me.cb_vulne_Psychic.Name = "cb_vulne_Psychic"
         Me.cb_vulne_Psychic.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Psychic.TabIndex = 36
@@ -734,7 +748,7 @@ Partial Class Form1
         'cb_vulne_Poison
         '
         Me.cb_vulne_Poison.AutoSize = True
-        Me.cb_vulne_Poison.Location = New System.Drawing.Point(257, 236)
+        Me.cb_vulne_Poison.Location = New System.Drawing.Point(257, 229)
         Me.cb_vulne_Poison.Name = "cb_vulne_Poison"
         Me.cb_vulne_Poison.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Poison.TabIndex = 35
@@ -743,7 +757,7 @@ Partial Class Form1
         'cb_vulne_Necrotic
         '
         Me.cb_vulne_Necrotic.AutoSize = True
-        Me.cb_vulne_Necrotic.Location = New System.Drawing.Point(257, 216)
+        Me.cb_vulne_Necrotic.Location = New System.Drawing.Point(257, 209)
         Me.cb_vulne_Necrotic.Name = "cb_vulne_Necrotic"
         Me.cb_vulne_Necrotic.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Necrotic.TabIndex = 34
@@ -752,7 +766,7 @@ Partial Class Form1
         'cb_vulne_Lightning
         '
         Me.cb_vulne_Lightning.AutoSize = True
-        Me.cb_vulne_Lightning.Location = New System.Drawing.Point(257, 196)
+        Me.cb_vulne_Lightning.Location = New System.Drawing.Point(257, 189)
         Me.cb_vulne_Lightning.Name = "cb_vulne_Lightning"
         Me.cb_vulne_Lightning.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Lightning.TabIndex = 33
@@ -761,7 +775,7 @@ Partial Class Form1
         'cb_vulne_Force
         '
         Me.cb_vulne_Force.AutoSize = True
-        Me.cb_vulne_Force.Location = New System.Drawing.Point(257, 176)
+        Me.cb_vulne_Force.Location = New System.Drawing.Point(257, 169)
         Me.cb_vulne_Force.Name = "cb_vulne_Force"
         Me.cb_vulne_Force.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Force.TabIndex = 32
@@ -770,7 +784,7 @@ Partial Class Form1
         'cb_vulne_Fire
         '
         Me.cb_vulne_Fire.AutoSize = True
-        Me.cb_vulne_Fire.Location = New System.Drawing.Point(257, 156)
+        Me.cb_vulne_Fire.Location = New System.Drawing.Point(257, 149)
         Me.cb_vulne_Fire.Name = "cb_vulne_Fire"
         Me.cb_vulne_Fire.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Fire.TabIndex = 31
@@ -779,7 +793,7 @@ Partial Class Form1
         'cb_vulne_Cold
         '
         Me.cb_vulne_Cold.AutoSize = True
-        Me.cb_vulne_Cold.Location = New System.Drawing.Point(257, 136)
+        Me.cb_vulne_Cold.Location = New System.Drawing.Point(257, 129)
         Me.cb_vulne_Cold.Name = "cb_vulne_Cold"
         Me.cb_vulne_Cold.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Cold.TabIndex = 30
@@ -788,7 +802,7 @@ Partial Class Form1
         'cb_vulne_Acid
         '
         Me.cb_vulne_Acid.AutoSize = True
-        Me.cb_vulne_Acid.Location = New System.Drawing.Point(257, 116)
+        Me.cb_vulne_Acid.Location = New System.Drawing.Point(257, 111)
         Me.cb_vulne_Acid.Name = "cb_vulne_Acid"
         Me.cb_vulne_Acid.Size = New System.Drawing.Size(15, 14)
         Me.cb_vulne_Acid.TabIndex = 29
@@ -824,7 +838,7 @@ Partial Class Form1
         'cb_immu_Thunder
         '
         Me.cb_immu_Thunder.AutoSize = True
-        Me.cb_immu_Thunder.Location = New System.Drawing.Point(178, 296)
+        Me.cb_immu_Thunder.Location = New System.Drawing.Point(178, 289)
         Me.cb_immu_Thunder.Name = "cb_immu_Thunder"
         Me.cb_immu_Thunder.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Thunder.TabIndex = 25
@@ -833,7 +847,7 @@ Partial Class Form1
         'cb_immu_Radiant
         '
         Me.cb_immu_Radiant.AutoSize = True
-        Me.cb_immu_Radiant.Location = New System.Drawing.Point(178, 276)
+        Me.cb_immu_Radiant.Location = New System.Drawing.Point(178, 269)
         Me.cb_immu_Radiant.Name = "cb_immu_Radiant"
         Me.cb_immu_Radiant.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Radiant.TabIndex = 24
@@ -842,7 +856,7 @@ Partial Class Form1
         'cb_immu_Psychic
         '
         Me.cb_immu_Psychic.AutoSize = True
-        Me.cb_immu_Psychic.Location = New System.Drawing.Point(178, 256)
+        Me.cb_immu_Psychic.Location = New System.Drawing.Point(178, 249)
         Me.cb_immu_Psychic.Name = "cb_immu_Psychic"
         Me.cb_immu_Psychic.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Psychic.TabIndex = 23
@@ -851,7 +865,7 @@ Partial Class Form1
         'cb_immu_Poison
         '
         Me.cb_immu_Poison.AutoSize = True
-        Me.cb_immu_Poison.Location = New System.Drawing.Point(178, 236)
+        Me.cb_immu_Poison.Location = New System.Drawing.Point(178, 229)
         Me.cb_immu_Poison.Name = "cb_immu_Poison"
         Me.cb_immu_Poison.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Poison.TabIndex = 22
@@ -860,7 +874,7 @@ Partial Class Form1
         'cb_immu_Necrotic
         '
         Me.cb_immu_Necrotic.AutoSize = True
-        Me.cb_immu_Necrotic.Location = New System.Drawing.Point(178, 216)
+        Me.cb_immu_Necrotic.Location = New System.Drawing.Point(178, 209)
         Me.cb_immu_Necrotic.Name = "cb_immu_Necrotic"
         Me.cb_immu_Necrotic.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Necrotic.TabIndex = 21
@@ -869,7 +883,7 @@ Partial Class Form1
         'cb_immu_Lightning
         '
         Me.cb_immu_Lightning.AutoSize = True
-        Me.cb_immu_Lightning.Location = New System.Drawing.Point(178, 196)
+        Me.cb_immu_Lightning.Location = New System.Drawing.Point(178, 189)
         Me.cb_immu_Lightning.Name = "cb_immu_Lightning"
         Me.cb_immu_Lightning.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Lightning.TabIndex = 20
@@ -878,7 +892,7 @@ Partial Class Form1
         'cb_immu_Force
         '
         Me.cb_immu_Force.AutoSize = True
-        Me.cb_immu_Force.Location = New System.Drawing.Point(178, 176)
+        Me.cb_immu_Force.Location = New System.Drawing.Point(178, 169)
         Me.cb_immu_Force.Name = "cb_immu_Force"
         Me.cb_immu_Force.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Force.TabIndex = 19
@@ -887,7 +901,7 @@ Partial Class Form1
         'cb_immu_Fire
         '
         Me.cb_immu_Fire.AutoSize = True
-        Me.cb_immu_Fire.Location = New System.Drawing.Point(178, 156)
+        Me.cb_immu_Fire.Location = New System.Drawing.Point(178, 149)
         Me.cb_immu_Fire.Name = "cb_immu_Fire"
         Me.cb_immu_Fire.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Fire.TabIndex = 18
@@ -896,7 +910,7 @@ Partial Class Form1
         'cb_immu_Cold
         '
         Me.cb_immu_Cold.AutoSize = True
-        Me.cb_immu_Cold.Location = New System.Drawing.Point(178, 136)
+        Me.cb_immu_Cold.Location = New System.Drawing.Point(178, 129)
         Me.cb_immu_Cold.Name = "cb_immu_Cold"
         Me.cb_immu_Cold.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Cold.TabIndex = 17
@@ -905,7 +919,7 @@ Partial Class Form1
         'cb_immu_Acid
         '
         Me.cb_immu_Acid.AutoSize = True
-        Me.cb_immu_Acid.Location = New System.Drawing.Point(178, 116)
+        Me.cb_immu_Acid.Location = New System.Drawing.Point(178, 110)
         Me.cb_immu_Acid.Name = "cb_immu_Acid"
         Me.cb_immu_Acid.Size = New System.Drawing.Size(15, 14)
         Me.cb_immu_Acid.TabIndex = 16
@@ -941,7 +955,7 @@ Partial Class Form1
         'cb_resist_Thunder
         '
         Me.cb_resist_Thunder.AutoSize = True
-        Me.cb_resist_Thunder.Location = New System.Drawing.Point(108, 297)
+        Me.cb_resist_Thunder.Location = New System.Drawing.Point(108, 290)
         Me.cb_resist_Thunder.Name = "cb_resist_Thunder"
         Me.cb_resist_Thunder.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Thunder.TabIndex = 12
@@ -950,7 +964,7 @@ Partial Class Form1
         'cb_resist_Radiant
         '
         Me.cb_resist_Radiant.AutoSize = True
-        Me.cb_resist_Radiant.Location = New System.Drawing.Point(108, 277)
+        Me.cb_resist_Radiant.Location = New System.Drawing.Point(108, 270)
         Me.cb_resist_Radiant.Name = "cb_resist_Radiant"
         Me.cb_resist_Radiant.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Radiant.TabIndex = 11
@@ -959,7 +973,7 @@ Partial Class Form1
         'cb_resist_Psychic
         '
         Me.cb_resist_Psychic.AutoSize = True
-        Me.cb_resist_Psychic.Location = New System.Drawing.Point(108, 257)
+        Me.cb_resist_Psychic.Location = New System.Drawing.Point(108, 250)
         Me.cb_resist_Psychic.Name = "cb_resist_Psychic"
         Me.cb_resist_Psychic.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Psychic.TabIndex = 10
@@ -968,7 +982,7 @@ Partial Class Form1
         'cb_resist_Poison
         '
         Me.cb_resist_Poison.AutoSize = True
-        Me.cb_resist_Poison.Location = New System.Drawing.Point(108, 237)
+        Me.cb_resist_Poison.Location = New System.Drawing.Point(108, 230)
         Me.cb_resist_Poison.Name = "cb_resist_Poison"
         Me.cb_resist_Poison.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Poison.TabIndex = 9
@@ -977,7 +991,7 @@ Partial Class Form1
         'cb_resist_Necrotic
         '
         Me.cb_resist_Necrotic.AutoSize = True
-        Me.cb_resist_Necrotic.Location = New System.Drawing.Point(108, 217)
+        Me.cb_resist_Necrotic.Location = New System.Drawing.Point(108, 210)
         Me.cb_resist_Necrotic.Name = "cb_resist_Necrotic"
         Me.cb_resist_Necrotic.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Necrotic.TabIndex = 8
@@ -986,7 +1000,7 @@ Partial Class Form1
         'cb_resist_Lightning
         '
         Me.cb_resist_Lightning.AutoSize = True
-        Me.cb_resist_Lightning.Location = New System.Drawing.Point(108, 197)
+        Me.cb_resist_Lightning.Location = New System.Drawing.Point(108, 190)
         Me.cb_resist_Lightning.Name = "cb_resist_Lightning"
         Me.cb_resist_Lightning.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Lightning.TabIndex = 7
@@ -995,7 +1009,7 @@ Partial Class Form1
         'cb_resist_Force
         '
         Me.cb_resist_Force.AutoSize = True
-        Me.cb_resist_Force.Location = New System.Drawing.Point(108, 177)
+        Me.cb_resist_Force.Location = New System.Drawing.Point(108, 170)
         Me.cb_resist_Force.Name = "cb_resist_Force"
         Me.cb_resist_Force.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Force.TabIndex = 6
@@ -1004,7 +1018,7 @@ Partial Class Form1
         'cb_resist_Fire
         '
         Me.cb_resist_Fire.AutoSize = True
-        Me.cb_resist_Fire.Location = New System.Drawing.Point(108, 157)
+        Me.cb_resist_Fire.Location = New System.Drawing.Point(108, 150)
         Me.cb_resist_Fire.Name = "cb_resist_Fire"
         Me.cb_resist_Fire.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Fire.TabIndex = 5
@@ -1013,7 +1027,7 @@ Partial Class Form1
         'cb_resist_Cold
         '
         Me.cb_resist_Cold.AutoSize = True
-        Me.cb_resist_Cold.Location = New System.Drawing.Point(108, 137)
+        Me.cb_resist_Cold.Location = New System.Drawing.Point(108, 130)
         Me.cb_resist_Cold.Name = "cb_resist_Cold"
         Me.cb_resist_Cold.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Cold.TabIndex = 4
@@ -1022,7 +1036,7 @@ Partial Class Form1
         'cb_resist_Acid
         '
         Me.cb_resist_Acid.AutoSize = True
-        Me.cb_resist_Acid.Location = New System.Drawing.Point(108, 117)
+        Me.cb_resist_Acid.Location = New System.Drawing.Point(108, 110)
         Me.cb_resist_Acid.Name = "cb_resist_Acid"
         Me.cb_resist_Acid.Size = New System.Drawing.Size(15, 14)
         Me.cb_resist_Acid.TabIndex = 3
@@ -1712,6 +1726,15 @@ Partial Class Form1
         Me.Button4.Text = "New"
         Me.Button4.UseVisualStyleBackColor = True
         '
+        'cb_immu_Critical
+        '
+        Me.cb_immu_Critical.AutoSize = True
+        Me.cb_immu_Critical.Location = New System.Drawing.Point(178, 391)
+        Me.cb_immu_Critical.Name = "cb_immu_Critical"
+        Me.cb_immu_Critical.Size = New System.Drawing.Size(15, 14)
+        Me.cb_immu_Critical.TabIndex = 77
+        Me.cb_immu_Critical.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -1881,4 +1904,6 @@ Partial Class Form1
     Friend WithEvents b_addat As Button
     Friend WithEvents Label15 As Label
     Friend WithEvents b_adheal As Button
+    Friend WithEvents Label16 As Label
+    Friend WithEvents cb_immu_Critical As CheckBox
 End Class

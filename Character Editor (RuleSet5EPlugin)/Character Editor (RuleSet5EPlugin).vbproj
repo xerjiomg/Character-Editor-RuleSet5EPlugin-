@@ -9,14 +9,18 @@
     <MyType>WindowsForms</MyType>
     <ApplicationIcon>xj_talespire.ico</ApplicationIcon>
     <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

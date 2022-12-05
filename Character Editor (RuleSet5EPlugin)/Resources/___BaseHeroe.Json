@@ -36,7 +36,7 @@
   ],
   "skills": [
     {
-      "name": "Inititative",
+      "name": "Initiative",
       "type": "Public",
       "roll": "1D20+0"
     },
@@ -56,7 +56,7 @@
       "roll": "1D20+0"
     },
     {
-      "name": "Atlethics",
+      "name": "Athletics",
       "type": "Public",
       "roll": "1D20+0"
     },
@@ -71,7 +71,7 @@
       "roll": "1D20+0"
     },
     {
-      "name": "Insigth",
+      "name": "Insight",
       "type": "Public",
       "roll": "1D20+2"
     },

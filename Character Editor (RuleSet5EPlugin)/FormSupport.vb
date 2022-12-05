@@ -41,9 +41,9 @@ Module FormSupport
         Try
             '' Cambio chorizero de color chorra
             If Form1.dg_Principal.Rows.Count <> 0 Then
-                If Form1.dg_Principal.Rows(0).Cells(1).Value = "true" Then
+                If Form1.dg_Principal.Rows(0).Cells(1).Value.ToString.ToLower = "true" Then
                     backcolor = Color.Linen
-                ElseIf Form1.dg_Principal.Rows(0).Cells(1).Value = "false" Then
+                ElseIf Form1.dg_Principal.Rows(0).Cells(1).Value.ToString.ToLower = "false" Then
                     backcolor = Color.Lavender
                 Else
                     backcolor = Color.Coral
