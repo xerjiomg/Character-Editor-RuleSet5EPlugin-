@@ -487,7 +487,6 @@ Public Class Form1
     Private Sub lb_Attacks_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lb_Attacks.SelectedIndexChanged
         Try
 
-
             b_rolldgcanedit = False
 
             dg_Rolls.Rows.Clear()
@@ -962,6 +961,7 @@ Public Class Form1
 
     Private Sub dg_Damages_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dg_Damages.CellValueChanged
         Try
+            Dim indicedamageindex As Integer = lb_damages.SelectedIndex
             If b_damagedgcanedit = True Then
                 Dim b_changename As Boolean = False
                 Dim s_caller As String = ""
@@ -1044,36 +1044,52 @@ Public Class Form1
                     If b_changename = True Then
                         '' regenerar lista
                         lb_damages.Items.Clear()
-                        If chara.attacks(lb_Attacks.SelectedIndex).link IsNot Nothing Then
-
-                            Dim tlink As Roll
-                            tlink = chara.attacks(lb_Attacks.SelectedIndex).link
-                            lb_damages.Items.Add(tlink.name)
-                            Dim i As Integer = 2
-                            While tlink.link IsNot Nothing
-                                Dim s_tlink As String = ""
-                                If tlink.name = tlink.link.name Then
-                                    s_tlink = " (" + i.ToString + ")"
-                                End If
-                                lb_damages.Items.Add(tlink.link.name + s_tlink)
-                                tlink = tlink.link
-                                i = i + 1
-                            End While
+                        If (lb_Attacks.SelectedIndex <> -1) Then
+                            If chara.attacks(lb_Attacks.SelectedIndex).link IsNot Nothing Then
+                                Dim tlink As Roll
+                                tlink = chara.attacks(lb_Attacks.SelectedIndex).link
+                                lb_damages.Items.Add(tlink.name)
+                                Dim i As Integer = 2
+                                While tlink.link IsNot Nothing
+                                    Dim s_tlink As String = ""
+                                    If tlink.name = tlink.link.name Then
+                                        s_tlink = " (" + i.ToString + ")"
+                                    End If
+                                    lb_damages.Items.Add(tlink.link.name + s_tlink)
+                                    tlink = tlink.link
+                                    i = i + 1
+                                End While
+                            End If
+                        Else
+                            If chara.attacksDC(lb_DCAttacks.SelectedIndex).link IsNot Nothing Then
+                                Dim tlink As Roll
+                                tlink = chara.attacksDC(lb_DCAttacks.SelectedIndex).link
+                                lb_damages.Items.Add(tlink.name)
+                                Dim i As Integer = 2
+                                While tlink.link IsNot Nothing
+                                    Dim s_tlink As String = ""
+                                    If tlink.name = tlink.link.name Then
+                                        s_tlink = " (" + i.ToString + ")"
+                                    End If
+                                    lb_damages.Items.Add(tlink.link.name + s_tlink)
+                                    tlink = tlink.link
+                                    i = i + 1
+                                End While
+                            End If
                         End If
+
                         b_changename = False
                     End If
-
                     ''  fin regenerar lista.
-
-
                 Else
                     'MsgBox("There is no selected list")
                 End If
 
             End If
+            lb_damages.SelectedIndex = indicedamageindex
             actualizarJsonText()
         Catch ex As Exception
-
+            MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
     End Sub
 
@@ -1231,8 +1247,8 @@ Public Class Form1
             baseroll.type = "Magic"
             baseroll.roll = "10/STR/zero"
             baseroll.range = "5/5"
-            baseroll.critmultip = "2"
-            baseroll.critrangemin = "20"
+            'baseroll.critmultip = ""
+            'baseroll.critrangemin = ""
             chara.attacksDC.Add(baseroll)
             lb_DCAttacks.Items.Clear()
             For Each roll In chara.attacksDC
@@ -1371,7 +1387,7 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = ""
-            baseroll.roll = "1d20+0"
+            baseroll.roll = "1d4+0"
 
             For Each l_caller In alllists
                 If l_caller.SelectedIndex <> -1 Then
@@ -2076,7 +2092,7 @@ Public Class Form1
 
                     spell = JsonConvert.DeserializeObject(Of List(Of Roll))(txtFichero)
                     For Each sp As Roll In spell
-                        If sp.name.Contains("/") Or sp.name.Contains("100") Then
+                        If sp.roll.Contains("/") Or sp.roll.Contains("100") Then
                             chara.attacksDC.Add(sp)
                         Else
                             chara.attacks.Add(sp)
