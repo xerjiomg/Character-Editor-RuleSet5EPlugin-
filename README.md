@@ -1,6 +1,7 @@
 **Character Editor for ruleset5ePlugin (Talepire Mod)**
 v1.1.2 [Download](https://github.com/xerjiomg/Character-Editor-RuleSet5EPlugin-/releases/download/1.1.2/Character.Editor.RuleSet5EPlugin.1.1.2.rar)
 Basic program to edit Json format of Dnd5e files related to Ruleset5ePlugin (Mod for Talespire)
+###### In case anyone wants to make a small donation: https://www.paypal.com/donate/?hosted_button_id=ZR3TV5XJP2LQ4
 
 <img src="https://github.com/xerjiomg/Character-Editor-RuleSet5EPlugin-/releases/download/v1.1.1/Character.Editor.jpg" width="500" height="300">
 
