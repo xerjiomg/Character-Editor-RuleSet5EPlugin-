@@ -19,6 +19,18 @@ Module FormSupport
     Public b_checkedchanges As Boolean = True
     Public alllists As New Collection(Of ListBox)
     Public backcolor As Color = Color.Thistle
+    'Public m_strMod As Integer = 0
+    'Public m_dexMod As Integer = 0
+    'Public m_conMod As Integer = 0
+    'Public m_intMod As Integer = 0
+    'Public m_wisMod As Integer = 0
+    'Public m_carMod As Integer = 0
+    'Public m_profMod As Integer = 0
+    'Public m_MattackMod As Integer = 0
+    'Public m_attackMod As Integer = 0
+    'Public m_CDMod As Integer = 0
+
+
     Function actualizarJsonText()
         Try
             Dim s_outpoutJson As String

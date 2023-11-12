@@ -1190,7 +1190,7 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = "Public"
-            baseroll.roll = "1d20+0"
+            baseroll.roll = "1D20+0"
             chara.skills.Add(baseroll)
             lb_Skill.Items.Clear()
             For Each roll In chara.skills
@@ -1225,7 +1225,7 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = "Melee"
-            baseroll.roll = "1d20+0"
+            baseroll.roll = "1D20+0"
             baseroll.range = "5/5"
             baseroll.critmultip = "2"
             baseroll.critrangemin = "20"
@@ -1266,7 +1266,7 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = "Magic"
-            baseroll.roll = "1d20+0"
+            baseroll.roll = "1D20+0"
             baseroll.range = "5/5"
             chara.healing.Add(baseroll)
             lb_Heals.Items.Clear()
@@ -1285,7 +1285,7 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = "Public"
-            baseroll.roll = "1d20+0"
+            baseroll.roll = "1D20+0"
             chara.saves.Add(baseroll)
             lb_Saves.Items.Clear()
             For Each roll In chara.saves
@@ -1387,7 +1387,7 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = ""
-            baseroll.roll = "1d4+0"
+            baseroll.roll = "1D4+0"
 
             For Each l_caller In alllists
                 If l_caller.SelectedIndex <> -1 Then
