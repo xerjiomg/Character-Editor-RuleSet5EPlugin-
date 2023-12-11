@@ -56,6 +56,7 @@ Namespace XJ
                 critmultip = source.critmultip
                 range = source.range
                 info = source.info
+                futureUse_icon = source.futureUse_icon
                 If source.link Is Nothing Then
                     link = Nothing
                 Else
