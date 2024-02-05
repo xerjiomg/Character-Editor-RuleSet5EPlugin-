@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.ObjectModel
 Imports System.IO
 Imports System.Text
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports Character_Editor__RuleSet5EPlugin_.XJ
 Imports Character_Editor__RuleSet5EPlugin_.XJ.RuleSet5ECharacterEditor
@@ -19,6 +20,8 @@ Module FormSupport
     Public b_checkedchanges As Boolean = True
     Public alllists As New Collection(Of ListBox)
     Public backcolor As Color = Color.Thistle
+    Public avoidmakechangesDamageGrids As Boolean = False
+
     'Public m_strMod As Integer = 0
     'Public m_dexMod As Integer = 0
     'Public m_conMod As Integer = 0
@@ -81,6 +84,20 @@ Module FormSupport
     End Function
     Function isValidrole(s_rolldices As String) As String
         Try
+            Dim deleteBool As Boolean = False
+            Dim s_rollDeletedices As String = ""
+            For Each tempChar As Char In s_rolldices
+                If tempChar = "{"c Then
+                    deleteBool = True
+                ElseIf tempChar = "}"c Then
+                    deleteBool = False
+                Else
+                    If deleteBool = False Then
+                        s_rollDeletedices = s_rollDeletedices + tempChar
+                    End If
+                End If
+            Next
+            s_rolldices = s_rollDeletedices
             s_rolldices = s_rolldices.ToUpper
             If s_rolldices = Nothing Or s_rolldices.Trim = "" Then
                 Return "The roll field cannot be empty"

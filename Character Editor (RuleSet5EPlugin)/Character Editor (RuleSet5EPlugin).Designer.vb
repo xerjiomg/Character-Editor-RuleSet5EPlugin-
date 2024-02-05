@@ -164,8 +164,19 @@ Partial Class Form1
         Me.l_creaturename = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Panelbase = New System.Windows.Forms.Panel()
+        Me.T_DefaultAPath = New System.Windows.Forms.TextBox()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.T_DefaultCPath = New System.Windows.Forms.TextBox()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.t_DCImport = New System.Windows.Forms.TextBox()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Cmb_AbilityMod = New System.Windows.Forms.ComboBox()
         Me.b_adheal = New System.Windows.Forms.Button()
+        Me.t_attackImport = New System.Windows.Forms.TextBox()
         Me.b_addat = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -189,7 +200,7 @@ Partial Class Form1
         'Button1
         '
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(118, 310)
+        Me.Button1.Location = New System.Drawing.Point(118, 426)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(51, 23)
         Me.Button1.TabIndex = 0
@@ -199,7 +210,7 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(66, 310)
+        Me.Button2.Location = New System.Drawing.Point(66, 426)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(46, 23)
         Me.Button2.TabIndex = 1
@@ -237,7 +248,7 @@ Partial Class Form1
         Me.dg_Principal.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dg_Principal.RowHeadersVisible = False
         Me.dg_Principal.RowTemplate.Height = 20
-        Me.dg_Principal.Size = New System.Drawing.Size(162, 245)
+        Me.dg_Principal.Size = New System.Drawing.Size(162, 362)
         Me.dg_Principal.TabIndex = 2
         '
         'c_Name
@@ -248,14 +259,14 @@ Partial Class Form1
         Me.c_Name.Name = "c_Name"
         Me.c_Name.ReadOnly = True
         Me.c_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.c_Name.Width = 80
+        Me.c_Name.Width = 72
         '
         'n_Value
         '
         Me.n_Value.HeaderText = "Value"
         Me.n_Value.Name = "n_Value"
         Me.n_Value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.n_Value.Width = 80
+        Me.n_Value.Width = 72
         '
         'panel_resi
         '
@@ -1653,6 +1664,11 @@ Partial Class Form1
         'Panelbase
         '
         Me.Panelbase.BackColor = System.Drawing.Color.GhostWhite
+        Me.Panelbase.Controls.Add(Me.T_DefaultAPath)
+        Me.Panelbase.Controls.Add(Me.Label37)
+        Me.Panelbase.Controls.Add(Me.Label36)
+        Me.Panelbase.Controls.Add(Me.T_DefaultCPath)
+        Me.Panelbase.Controls.Add(Me.LinkLabel1)
         Me.Panelbase.Controls.Add(Me.Button3)
         Me.Panelbase.Controls.Add(Me.Panel1)
         Me.Panelbase.Controls.Add(Me.Button4)
@@ -1666,38 +1682,142 @@ Partial Class Form1
         Me.Panelbase.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panelbase.Location = New System.Drawing.Point(0, 0)
         Me.Panelbase.Name = "Panelbase"
-        Me.Panelbase.Size = New System.Drawing.Size(897, 473)
+        Me.Panelbase.Size = New System.Drawing.Size(897, 525)
         Me.Panelbase.TabIndex = 65
+        '
+        'T_DefaultAPath
+        '
+        Me.T_DefaultAPath.Location = New System.Drawing.Point(652, 499)
+        Me.T_DefaultAPath.Name = "T_DefaultAPath"
+        Me.T_DefaultAPath.Size = New System.Drawing.Size(233, 23)
+        Me.T_DefaultAPath.TabIndex = 74
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Location = New System.Drawing.Point(520, 501)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(123, 15)
+        Me.Label37.TabIndex = 73
+        Me.Label37.Text = "Default Attacks Patch:"
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(509, 479)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(134, 15)
+        Me.Label36.TabIndex = 72
+        Me.Label36.Text = "Default Characters Path:"
+        '
+        'T_DefaultCPath
+        '
+        Me.T_DefaultCPath.Location = New System.Drawing.Point(652, 474)
+        Me.T_DefaultCPath.Name = "T_DefaultCPath"
+        Me.T_DefaultCPath.Size = New System.Drawing.Size(233, 23)
+        Me.T_DefaultCPath.TabIndex = 71
+        '
+        'LinkLabel1
+        '
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.LinkLabel1.Location = New System.Drawing.Point(11, 454)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(155, 13)
+        Me.LinkLabel1.TabIndex = 70
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "Documentation and updates"
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Label35)
+        Me.Panel1.Controls.Add(Me.Label34)
+        Me.Panel1.Controls.Add(Me.t_DCImport)
+        Me.Panel1.Controls.Add(Me.Label33)
+        Me.Panel1.Controls.Add(Me.Cmb_AbilityMod)
         Me.Panel1.Controls.Add(Me.b_adheal)
+        Me.Panel1.Controls.Add(Me.t_attackImport)
         Me.Panel1.Controls.Add(Me.b_addat)
         Me.Panel1.Controls.Add(Me.Label15)
-        Me.Panel1.Location = New System.Drawing.Point(7, 354)
+        Me.Panel1.Location = New System.Drawing.Point(8, 474)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(162, 51)
+        Me.Panel1.Size = New System.Drawing.Size(499, 48)
         Me.Panel1.TabIndex = 69
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point)
+        Me.Label35.Location = New System.Drawing.Point(397, 4)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(49, 13)
+        Me.Label35.TabIndex = 75
+        Me.Label35.Text = "DC Mod"
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point)
+        Me.Label34.Location = New System.Drawing.Point(182, 5)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(66, 13)
+        Me.Label34.TabIndex = 74
+        Me.Label34.Text = "Ability Mod"
+        '
+        't_DCImport
+        '
+        Me.t_DCImport.Location = New System.Drawing.Point(373, 22)
+        Me.t_DCImport.Name = "t_DCImport"
+        Me.t_DCImport.Size = New System.Drawing.Size(96, 23)
+        Me.t_DCImport.TabIndex = 72
+        Me.t_DCImport.Text = "8+{pb}"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point)
+        Me.Label33.Location = New System.Drawing.Point(282, 5)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(66, 13)
+        Me.Label33.TabIndex = 71
+        Me.Label33.Text = "Attack Mod"
+        '
+        'Cmb_AbilityMod
+        '
+        Me.Cmb_AbilityMod.FormattingEnabled = True
+        Me.Cmb_AbilityMod.Items.AddRange(New Object() {"", "{str}", "{dex}", "{con}", "{int}", "{wis}", "{cha}"})
+        Me.Cmb_AbilityMod.Location = New System.Drawing.Point(179, 22)
+        Me.Cmb_AbilityMod.Name = "Cmb_AbilityMod"
+        Me.Cmb_AbilityMod.Size = New System.Drawing.Size(69, 23)
+        Me.Cmb_AbilityMod.TabIndex = 73
         '
         'b_adheal
         '
         Me.b_adheal.Enabled = False
         Me.b_adheal.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.b_adheal.Location = New System.Drawing.Point(90, 20)
+        Me.b_adheal.Location = New System.Drawing.Point(83, 21)
         Me.b_adheal.Name = "b_adheal"
-        Me.b_adheal.Size = New System.Drawing.Size(66, 23)
+        Me.b_adheal.Size = New System.Drawing.Size(77, 23)
         Me.b_adheal.TabIndex = 69
         Me.b_adheal.Text = "Heal"
         Me.b_adheal.UseVisualStyleBackColor = True
+        '
+        't_attackImport
+        '
+        Me.t_attackImport.Location = New System.Drawing.Point(258, 22)
+        Me.t_attackImport.Name = "t_attackImport"
+        Me.t_attackImport.Size = New System.Drawing.Size(99, 23)
+        Me.t_attackImport.TabIndex = 70
+        Me.t_attackImport.Text = "{pb}"
         '
         'b_addat
         '
         Me.b_addat.Enabled = False
         Me.b_addat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.b_addat.Location = New System.Drawing.Point(2, 20)
+        Me.b_addat.Location = New System.Drawing.Point(2, 21)
         Me.b_addat.Name = "b_addat"
-        Me.b_addat.Size = New System.Drawing.Size(82, 23)
+        Me.b_addat.Size = New System.Drawing.Size(75, 23)
         Me.b_addat.TabIndex = 67
         Me.b_addat.Text = "Attacks"
         Me.b_addat.UseVisualStyleBackColor = True
@@ -1706,16 +1826,16 @@ Partial Class Form1
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point)
-        Me.Label15.Location = New System.Drawing.Point(58, 2)
+        Me.Label15.Location = New System.Drawing.Point(32, 3)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(62, 15)
+        Me.Label15.Size = New System.Drawing.Size(97, 15)
         Me.Label15.TabIndex = 68
-        Me.Label15.Text = "Add Spells"
+        Me.Label15.Text = "Add to Character"
         '
         'Button4
         '
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Location = New System.Drawing.Point(7, 310)
+        Me.Button4.Location = New System.Drawing.Point(7, 426)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(53, 23)
         Me.Button4.TabIndex = 65
@@ -1726,7 +1846,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(897, 473)
+        Me.ClientSize = New System.Drawing.Size(897, 525)
         Me.Controls.Add(Me.Panelbase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1824,8 +1944,6 @@ Partial Class Form1
     Friend WithEvents panel_lists As Panel
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
-    Friend WithEvents c_Name As DataGridViewTextBoxColumn
-    Friend WithEvents n_Value As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents Button3 As Button
@@ -1892,4 +2010,17 @@ Partial Class Form1
     Friend WithEvents b_adheal As Button
     Friend WithEvents Label16 As Label
     Friend WithEvents cb_immu_Critical As CheckBox
+    Friend WithEvents c_Name As DataGridViewTextBoxColumn
+    Friend WithEvents n_Value As DataGridViewTextBoxColumn
+    Friend WithEvents Label33 As Label
+    Friend WithEvents t_attackImport As TextBox
+    Friend WithEvents t_DCImport As TextBox
+    Friend WithEvents Cmb_AbilityMod As ComboBox
+    Friend WithEvents Label35 As Label
+    Friend WithEvents Label34 As Label
+    Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents T_DefaultCPath As TextBox
+    Friend WithEvents T_DefaultAPath As TextBox
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label36 As Label
 End Class

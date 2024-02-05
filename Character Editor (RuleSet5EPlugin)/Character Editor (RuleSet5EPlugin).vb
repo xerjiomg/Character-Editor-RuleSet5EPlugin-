@@ -2,6 +2,7 @@
 Imports System.Buffers.Text
 Imports System.IO
 Imports System.Net.Http
+Imports System.Net.Security
 
 'Imports System.Net.WebRequestMethods
 Imports System.Text
@@ -9,6 +10,8 @@ Imports System.Text.Unicode
 Imports Character_Editor__RuleSet5EPlugin_.XJ.RuleSet5ECharacterEditor
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
+
+'' VERSIÓN 1.2.0
 
 Public Class Form1
     ' Public chara As New Character
@@ -29,6 +32,7 @@ Public Class Form1
 
         Dim dlAbrir As New System.Windows.Forms.SaveFileDialog
         Dim dt_principal As New DataTable
+        dlAbrir.InitialDirectory = T_DefaultCPath.Text
         dlAbrir.Filter = "Archivos Dnd5e (*.Dnd5e)|*.Dnd5e|" & "Todos los archivos (*.*)|*.*"
         'dlAbrir.Multiselect = False
         dlAbrir.CheckFileExists = False
@@ -69,6 +73,7 @@ Public Class Form1
             Dim fichero As String
             Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
             Dim dt_principal As New DataTable
+            dlAbrir.InitialDirectory = T_DefaultCPath.Text
             dlAbrir.Filter = "File Dnd5e (*.Dnd5e)|*.Dnd5e|" & "Todos los archivos (*.*)|*.*"
             dlAbrir.Multiselect = False
             dlAbrir.CheckFileExists = False
@@ -96,7 +101,10 @@ Public Class Form1
                 dg_Principal.Rows.Add("Int", chara.Int)
                 dg_Principal.Rows.Add("Wis", chara.wis)
                 dg_Principal.Rows.Add("Cha", chara.cha)
-                dg_Principal.Rows.Add("Reach", chara.reach)
+                dg_Principal.Rows.Add("lv", chara.lv)
+                dg_Principal.Rows.Add("var1", chara.var1)
+                dg_Principal.Rows.Add("var2", chara.var2)
+                dg_Principal.Rows.Add("var3", chara.var3)
                 '' Cambio chorizero de color chorra
                 If dg_Principal.Rows.Count <> 0 Then
                     changecolors()
@@ -287,7 +295,11 @@ Public Class Form1
 
     Private Sub dg_Principal_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dg_Principal.CellValueChanged
         Try
-
+            If e.RowIndex <> -1 Then
+                If dg_Principal.Rows(e.RowIndex).Cells(1).Value = Nothing Then
+                    dg_Principal.Rows(e.RowIndex).Cells(1).Value = String.Empty
+                End If
+            End If
 
             Select Case e.RowIndex
                 Case 0
@@ -387,6 +399,27 @@ Public Class Form1
                         MsgBox("Invalid value: must be an integer", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
                         dg_Principal.Rows(e.RowIndex).Cells(1).Value = chara.reach.ToString
                     End If
+                Case 11
+                    If IsNumeric(dg_Principal.Rows(e.RowIndex).Cells(1).Value) Then
+                        If (dg_Principal.Rows(e.RowIndex).Cells(1).Value Mod 1) = 0 Then
+                            chara.lv = dg_Principal.Rows(e.RowIndex).Cells(1).Value.ToString
+                        End If
+                    Else
+                        MsgBox("Invalid value: must be an integer", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
+                        dg_Principal.Rows(e.RowIndex).Cells(1).Value = chara.lv.ToString
+                    End If
+                Case 12
+                    Dim tempIsvalidrole As String = isValidrole(dg_Principal.Rows(e.RowIndex).Cells(1).Value.ToString.Replace(" ", ""))
+                    If tempIsvalidrole = "" Or tempIsvalidrole = "The roll field cannot be empty" Then
+                        chara.var1 = dg_Principal.Rows(e.RowIndex).Cells(1).Value.ToString
+                    Else
+                        MsgBox(tempIsvalidrole, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
+                        dg_Principal.Rows(e.RowIndex).Cells(1).Value = chara.var1.ToString
+                    End If
+                Case 13
+
+                Case 14
+
             End Select
 
             '' Cambio chorizero de color chorra
@@ -779,6 +812,13 @@ Public Class Form1
     End Sub
 
     Private Sub dg_Rolls_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dg_Rolls.CellValueChanged
+
+        If e.RowIndex <> -1 Then
+            If dg_Rolls.Rows(e.RowIndex).Cells(1).Value = Nothing Then
+                dg_Rolls.Rows(e.RowIndex).Cells(1).Value = String.Empty
+            End If
+        End If
+
         Try
 
             If b_rolldgcanedit = True Then
@@ -849,7 +889,26 @@ Public Class Form1
                                         s_roll_Dc = dg_Rolls.Rows(e.RowIndex).Cells(1).Value.ToString.Split("/")
                                     End If
                                     If s_roll_Dc.Length = 3 Then
-                                        If IsNumeric(s_roll_Dc(0)) And (s_roll_Dc(0) Mod 1) = 0 And s_validStats.Contains(s_roll_Dc(1).ToUpper) And s_validDc3rdvar.Contains(s_roll_Dc(2).ToUpper) Then
+
+                                        '' verificar si tiene {} etiquetas previamente
+                                        Dim deleteBool As Boolean = False
+                                        Dim s_rollDeletedices As String = ""
+                                        For Each tempChar As Char In s_roll_Dc(0)
+                                            If tempChar = "{"c Then
+                                                deleteBool = True
+                                            ElseIf tempChar = "}"c Then
+                                                deleteBool = False
+                                            Else
+                                                If deleteBool = False Then
+                                                    s_rollDeletedices = s_rollDeletedices + tempChar
+                                                End If
+                                            End If
+                                        Next
+                                        Dim dcFirstMember = s_rollDeletedices
+                                        '' fin de veriricacion
+
+
+                                        If IsNumeric(dcFirstMember) AndAlso (dcFirstMember Mod 1) = 0 And s_validStats.Contains(s_roll_Dc(1).ToUpper) And s_validDc3rdvar.Contains(s_roll_Dc(2).ToUpper) Then
                                             tempRoll.roll = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
                                         Else
                                             dg_Rolls.Rows(e.RowIndex).Cells(1).Value = dg_Rolls.Tag
@@ -961,6 +1020,17 @@ Public Class Form1
 
     Private Sub dg_Damages_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dg_Damages.CellValueChanged
         Try
+
+            If avoidmakechangesDamageGrids = True Then
+                Exit Sub
+            End If
+
+            If e.RowIndex <> -1 Then
+                If dg_Damages.Rows(e.RowIndex).Cells(1).Value = Nothing Then
+                    dg_Damages.Rows(e.RowIndex).Cells(1).Value = String.Empty
+                End If
+            End If
+
             Dim indicedamageindex As Integer = lb_damages.SelectedIndex
             If b_damagedgcanedit = True Then
                 Dim b_changename As Boolean = False
@@ -1009,7 +1079,9 @@ Public Class Form1
                                 templink.name = dg_Damages.Rows(e.RowIndex).Cells(1).Value
                                 b_changename = True
                             Else
+                                avoidmakechangesDamageGrids = True
                                 dg_Damages.Rows(e.RowIndex).Cells(1).Value = dg_Damages.Tag
+                                avoidmakechangesDamageGrids = False
                                 MsgBox("The name field cannot be empty", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
                             End If
                         Case 3
@@ -1017,7 +1089,9 @@ Public Class Form1
                             If s_validrol = "" Then
                                 templink.roll = dg_Damages.Rows(e.RowIndex).Cells(1).Value
                             Else
+                                avoidmakechangesDamageGrids = True
                                 dg_Damages.Rows(e.RowIndex).Cells(1).Value = dg_Damages.Tag
+                                avoidmakechangesDamageGrids = False
                                 MsgBox(s_validrol, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
                             End If
                         Case 6
@@ -1027,19 +1101,19 @@ Public Class Form1
                     Select Case s_caller
                         Case "lb_Attacks"
                             chara.attacks(i_caller) = tempRoll
-                            lb_Saves.Items.Item(lb_Attacks.SelectedIndex) = tempRoll.name
+                            'lb_Attacks.Items.Item(lb_Attacks.SelectedIndex) = tempRoll.name //2024/02/05 para evitar un error quizá me arreienta más tarde porque no se por que estaba aquí este código, no parece necesario. Aun así hay que revisar el problema de redundancia al llamar a Datachange sobre si mismo en el grid de daños
                         Case "lb_DCAttacks"
                             chara.attacksDC(i_caller) = tempRoll
-                            lb_DCAttacks.Items.Item(lb_DCAttacks.SelectedIndex) = tempRoll.name
+                            ''lb_DCAttacks.Items.Item(lb_DCAttacks.SelectedIndex) = tempRoll.name
                         Case "lb_Heals"
                             chara.healing(i_caller) = tempRoll
-                            lb_Heals.Items.Item(lb_Heals.SelectedIndex) = tempRoll.name
+                            ''lb_Heals.Items.Item(lb_Heals.SelectedIndex) = tempRoll.name
                         Case "lb_Skill"
                             chara.skills(i_caller) = tempRoll
-                            lb_Skill.Items.Item(lb_Skill.SelectedIndex) = tempRoll.name
+                            ''lb_Skill.Items.Item(lb_Skill.SelectedIndex) = tempRoll.name
                         Case "lb_Saves"
                             chara.saves(i_caller) = tempRoll
-                            lb_Saves.Items.Item(lb_Saves.SelectedIndex) = tempRoll.name
+                            ''lb_Saves.Items.Item(lb_Saves.SelectedIndex) = tempRoll.name
                     End Select
                     If b_changename = True Then
                         '' regenerar lista
@@ -1803,7 +1877,8 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-
+            T_DefaultCPath.Text = My.Settings.characterPath
+            T_DefaultAPath.Text = My.Settings.spellPath
             alllists.Add(lb_Attacks)
             alllists.Add(lb_DCAttacks)
             alllists.Add(lb_Skill)
@@ -1812,6 +1887,7 @@ Public Class Form1
             ''b_addc.BackColor = Color.LightGray
             b_addat.BackColor = Color.LightGray
             b_adheal.BackColor = Color.LightGray
+            Me.Text = Me.Text + " [Ver: " + My.Application.Info.Version.ToString + " ]"
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1843,6 +1919,11 @@ Public Class Form1
                 dg_Principal.Rows.Add("Wis", chara.wis)
                 dg_Principal.Rows.Add("Cha", chara.cha)
                 dg_Principal.Rows.Add("Reach", chara.reach)
+                dg_Principal.Rows.Add("Lv", chara.lv)
+                dg_Principal.Rows.Add("Var1", chara.var1)
+                dg_Principal.Rows.Add("Var2", chara.var2)
+                dg_Principal.Rows.Add("Var3", chara.var3)
+
                 '' Cambio chorizero de color chorra
                 If dg_Principal.Rows.Count <> 0 Then
                     changecolors()
@@ -2077,15 +2158,16 @@ Public Class Form1
             'Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
             Dim spell As List(Of Roll) = New List(Of Roll)()
             Dim fichero As String
-            Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
+            Dim dlAbrirSpell As New System.Windows.Forms.OpenFileDialog
             Dim dt_principal As New DataTable
-            dlAbrir.Filter = "File Dnd5e (*.spell)|*.spell|" & "Todos los archivos (*.*)|*.*"
-            dlAbrir.Multiselect = False
-            dlAbrir.CheckFileExists = False
-            dlAbrir.Title = "Select File"
-            dlAbrir.ShowDialog()
-            If dlAbrir.FileName <> "" And System.IO.File.Exists(dlAbrir.FileName) Then
-                fichero = dlAbrir.FileName
+            dlAbrirSpell.InitialDirectory = T_DefaultAPath.Text
+            dlAbrirSpell.Filter = "File Dnd5e (*.spell)|*.spell|" & "Todos los archivos (*.*)|*.*"
+            dlAbrirSpell.Multiselect = False
+            dlAbrirSpell.CheckFileExists = False
+            dlAbrirSpell.Title = "Select File"
+            dlAbrirSpell.ShowDialog()
+            If dlAbrirSpell.FileName <> "" And System.IO.File.Exists(dlAbrirSpell.FileName) Then
+                fichero = dlAbrirSpell.FileName
                 txtFichero = File.ReadAllText(fichero)
                 If txtFichero <> "" Then
                     spell = Nothing
@@ -2093,8 +2175,32 @@ Public Class Form1
                     spell = JsonConvert.DeserializeObject(Of List(Of Roll))(txtFichero)
                     For Each sp As Roll In spell
                         If sp.roll.Contains("/") Or sp.roll.Contains("100") Then
+                            If Not (sp.roll.Contains("100")) Then
+                                Dim temp_roll_import As String
+                                temp_roll_import = t_DCImport.Text
+                                If Cmb_AbilityMod.Text <> "" Then
+                                    If temp_roll_import <> "" Then
+                                        temp_roll_import = temp_roll_import + "+" + Cmb_AbilityMod.Text
+                                    Else
+                                        temp_roll_import = Cmb_AbilityMod.Text
+                                    End If
+
+                                End If
+                                sp.roll = temp_roll_import + sp.roll
+                            End If
                             chara.attacksDC.Add(sp)
                         Else
+                            Dim temp_roll_import As String = ""
+                            If t_attackImport.Text <> "" Then
+                                temp_roll_import = t_attackImport.Text
+                            End If
+                            If Cmb_AbilityMod.Text <> "" Then
+                                temp_roll_import = temp_roll_import + "+" + Cmb_AbilityMod.Text
+                            End If
+
+                            If temp_roll_import <> "" Then
+                                sp.roll = sp.roll + "+" + temp_roll_import
+                            End If
                             chara.attacks.Add(sp)
                         End If
                         lb_Attacks.Items.Clear()
@@ -2147,6 +2253,7 @@ Public Class Form1
             Dim fichero As String
             Dim dlAbrir As New System.Windows.Forms.OpenFileDialog
             Dim dt_principal As New DataTable
+            dlAbrir.InitialDirectory = T_DefaultAPath.Text
             dlAbrir.Filter = "File Dnd5e (*.spell)|*.spell|" & "Todos los archivos (*.*)|*.*"
             dlAbrir.Multiselect = False
             dlAbrir.CheckFileExists = False
@@ -2172,5 +2279,22 @@ Public Class Form1
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Dim visitGit As New ProcessStartInfo("https://github.com/xerjiomg/Character-Editor-RuleSet5EPlugin-") With {.UseShellExecute = True}
+        Process.Start(visitGit)
+    End Sub
+
+    Private Sub T_DefaultCPath_TextChanged(sender As Object, e As EventArgs) Handles T_DefaultCPath.TextChanged
+        If T_DefaultCPath.Text <> My.Settings.characterPath Then
+            My.Settings.characterPath = T_DefaultCPath.Text
+        End If
+    End Sub
+
+    Private Sub T_DefaultAPath_TextChanged(sender As Object, e As EventArgs) Handles T_DefaultAPath.TextChanged
+        If T_DefaultAPath.Text <> My.Settings.spellPath Then
+            My.Settings.spellPath = T_DefaultAPath.Text
+        End If
     End Sub
 End Class

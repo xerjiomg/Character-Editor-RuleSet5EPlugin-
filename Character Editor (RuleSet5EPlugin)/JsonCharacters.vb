@@ -15,7 +15,16 @@ Namespace XJ
             Public Property Int As String = "10"
             Public Property wis As String = "10"
             Public Property cha As String = "10"
-            Public Property speed As String = "30"
+            Public Property speed As String = ""
+            <DefaultValue("")>
+            Public Property lv As String = ""
+            <DefaultValue("")>
+            Public Property var1 As String = ""
+            <DefaultValue("")>
+            Public Property var2 As String = ""
+            <DefaultValue("")>
+            Public Property var3 As String = ""
+
             Public Property attacks As List(Of Roll) = New List(Of Roll)()
             Public Property attacksDC As List(Of Roll) = New List(Of Roll)()
             Public Property saves As List(Of Roll) = New List(Of Roll)()
