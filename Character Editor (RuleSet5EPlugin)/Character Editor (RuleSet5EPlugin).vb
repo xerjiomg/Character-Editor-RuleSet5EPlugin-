@@ -904,7 +904,11 @@ Public Class Form1
                                                 End If
                                             End If
                                         Next
-                                        Dim dcFirstMember = s_rollDeletedices
+                                        s_rollDeletedices = s_rollDeletedices.Replace("+", "")
+                                        s_rollDeletedices = s_rollDeletedices.Replace("-", "")
+
+
+                                        Dim dcFirstMember As String = s_rollDeletedices
                                         '' fin de veriricacion
 
 
@@ -1299,10 +1303,16 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = "Melee"
-            baseroll.roll = "1D20+0"
+            baseroll.roll = "1D20"
             baseroll.range = "5/5"
             baseroll.critmultip = "2"
             baseroll.critrangemin = "20"
+            If Cmb_AbilityMod.Text <> "" Then
+                baseroll.roll = baseroll.roll + "+" + Cmb_AbilityMod.Text
+            End If
+            If t_attackImport.Text <> "" Then
+                baseroll.roll = baseroll.roll + "+" + t_attackImport.Text
+            End If
             chara.attacks.Add(baseroll)
             lb_Attacks.Items.Clear()
             For Each roll In chara.attacks
@@ -1323,6 +1333,16 @@ Public Class Form1
             baseroll.range = "5/5"
             'baseroll.critmultip = ""
             'baseroll.critrangemin = ""
+            If Cmb_AbilityMod.Text <> "" Then
+                baseroll.roll = Cmb_AbilityMod.Text + "+" + baseroll.roll
+            End If
+            If t_DCImport.Text <> "" Then
+                baseroll.roll = t_DCImport.Text + "+" + baseroll.roll
+            End If
+            If Cmb_AbilityMod.Text <> "" Or t_DCImport.Text <> "" Then
+                baseroll.roll = baseroll.roll.Replace("+10", "")
+            End If
+
             chara.attacksDC.Add(baseroll)
             lb_DCAttacks.Items.Clear()
             For Each roll In chara.attacksDC
@@ -1340,7 +1360,7 @@ Public Class Form1
             Dim baseroll As New Roll
             baseroll.name = "New"
             baseroll.type = "Magic"
-            baseroll.roll = "1D20+0"
+            baseroll.roll = "1D4+0"
             baseroll.range = "5/5"
             chara.healing.Add(baseroll)
             lb_Heals.Items.Clear()
