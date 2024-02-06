@@ -884,44 +884,44 @@ Public Class Form1
                                 If dg_Rolls.Rows(e.RowIndex).Cells(1).Value.ToString = "100" Then
                                     tempRoll.roll = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
                                 Else
-                                    Dim s_roll_Dc As String() = {""}
-                                    If dg_Rolls.Rows(e.RowIndex).Cells(1).Value.ToString.Contains("/") Then
-                                        s_roll_Dc = dg_Rolls.Rows(e.RowIndex).Cells(1).Value.ToString.Split("/")
-                                    End If
-                                    If s_roll_Dc.Length = 3 Then
+                                    'Dim s_roll_Dc As String() = {""}
+                                    'If dg_Rolls.Rows(e.RowIndex).Cells(1).Value.ToString.Contains("/") Then
+                                    '    s_roll_Dc = dg_Rolls.Rows(e.RowIndex).Cells(1).Value.ToString.Split("/")
+                                    'End If
+                                    'If s_roll_Dc.Length = 3 Then
 
-                                        '' verificar si tiene {} etiquetas previamente
-                                        Dim deleteBool As Boolean = False
-                                        Dim s_rollDeletedices As String = ""
-                                        For Each tempChar As Char In s_roll_Dc(0)
-                                            If tempChar = "{"c Then
-                                                deleteBool = True
-                                            ElseIf tempChar = "}"c Then
-                                                deleteBool = False
-                                            Else
-                                                If deleteBool = False Then
-                                                    s_rollDeletedices = s_rollDeletedices + tempChar
-                                                End If
-                                            End If
-                                        Next
-                                        s_rollDeletedices = s_rollDeletedices.Replace("+", "")
-                                        s_rollDeletedices = s_rollDeletedices.Replace("-", "")
-
-
-                                        Dim dcFirstMember As String = s_rollDeletedices
-                                        '' fin de veriricacion
+                                    '    '' verificar si tiene {} etiquetas previamente
+                                    '    Dim deleteBool As Boolean = False
+                                    '    Dim s_rollDeletedices As String = ""
+                                    '    For Each tempChar As Char In s_roll_Dc(0)
+                                    '        If tempChar = "{"c Then
+                                    '            deleteBool = True
+                                    '        ElseIf tempChar = "}"c Then
+                                    '            deleteBool = False
+                                    '        Else
+                                    '            If deleteBool = False Then
+                                    '                s_rollDeletedices = s_rollDeletedices + tempChar
+                                    '            End If
+                                    '        End If
+                                    '    Next
+                                    '    s_rollDeletedices = s_rollDeletedices.Replace("+", "")
+                                    '    s_rollDeletedices = s_rollDeletedices.Replace("-", "")
 
 
-                                        If IsNumeric(dcFirstMember) AndAlso (dcFirstMember Mod 1) = 0 And s_validStats.Contains(s_roll_Dc(1).ToUpper) And s_validDc3rdvar.Contains(s_roll_Dc(2).ToUpper) Then
-                                            tempRoll.roll = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
-                                        Else
-                                            dg_Rolls.Rows(e.RowIndex).Cells(1).Value = dg_Rolls.Tag
-                                            MsgBox("The value must be 100 or 3 values split by (/): Number/" + s_validStats + "/" + s_validDc3rdvar, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
-                                        End If
-                                    Else
-                                        dg_Rolls.Rows(e.RowIndex).Cells(1).Value = dg_Rolls.Tag
-                                        MsgBox("The value must be 100 or 3 values split by (/): Number/" + s_validStats + "/" + s_validDc3rdvar, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
-                                    End If
+                                    '    Dim dcFirstMember As String = s_rollDeletedices
+                                    '' fin de veriricacion
+
+
+                                    '' If IsNumeric(dcFirstMember) AndAlso (dcFirstMember Mod 1) = 0 And s_validStats.Contains(s_roll_Dc(1).ToUpper) And s_validDc3rdvar.Contains(s_roll_Dc(2).ToUpper) Then
+                                    tempRoll.roll = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
+                                    ''Else
+                                    ''    dg_Rolls.Rows(e.RowIndex).Cells(1).Value = dg_Rolls.Tag
+                                    ''    MsgBox("The value must be 100 or 3 values split by (/): Number/" + s_validStats + "/" + s_validDc3rdvar, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
+                                    ''End If
+                                    '' Else
+                                    ''dg_Rolls.Rows(e.RowIndex).Cells(1).Value = dg_Rolls.Tag
+                                    ''MsgBox("The value must be 100 or 3 values split by (/): Number/" + s_validStats + "/" + s_validDc3rdvar, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
+                                    '' End If
                                 End If
                             Else
                                 Dim s_validrol As String = isValidrole(dg_Rolls.Rows(e.RowIndex).Cells(1).Value.ToString.Replace(" ", ""))
