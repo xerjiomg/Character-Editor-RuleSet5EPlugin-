@@ -21,6 +21,8 @@ Module FormSupport
     Public alllists As New Collection(Of ListBox)
     Public backcolor As Color = Color.Thistle
     Public avoidmakechangesDamageGrids As Boolean = False
+    Public changecolorsList As Boolean = False
+    Public checkProficencyEvent As Boolean = True
 
     'Public m_strMod As Integer = 0
     'Public m_dexMod As Integer = 0
@@ -149,6 +151,8 @@ Module FormSupport
             For Each deletelist As ListBox In alllists
                 deletelist.Items.Clear()
             Next
+            Form1.lb_Skill.Clear()
+            Form1.lb_Saves.Clear()
             Form1.dg_Damages.Rows.Clear()
             Form1.dg_Rolls.Rows.Clear()
             Form1.dg_Principal.Rows.Clear()
@@ -165,4 +169,36 @@ Module FormSupport
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
     End Function
+    Sub LoadSkillsList()
+        For Each roll In chara.skills
+            Form1.lb_Skill.Items.Add(roll.name)
+            If chara.skills(Form1.lb_Skill.Items.Count - 1).roll.Contains("{pb}") Then
+                Dim tempfont As New Font(Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font, FontStyle.Bold)
+                Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font = tempfont
+            End If
+            If chara.skills(Form1.lb_Skill.Items.Count - 1).roll.Contains("{ex}") Then
+                'Dim tempfont As New Font(Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font, FontStyle.Regular)
+                'Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font = tempfont
+                Dim tempfont As New Font(Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font, FontStyle.Bold)
+                Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font = tempfont
+                Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).ForeColor = Color.Red
+            End If
+            If chara.skills(Form1.lb_Skill.Items.Count - 1).roll.Contains("{ph}") Then
+                'Dim tempfont As New Font(Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font, FontStyle.Bold)
+                'Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font = tempfont
+                Dim tempfont As New Font(Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font, FontStyle.Bold)
+                Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).Font = tempfont
+                Form1.lb_Skill.Items(Form1.lb_Skill.Items.Count - 1).ForeColor = Color.Sienna
+            End If
+        Next
+    End Sub
+    Sub LoadSavesList()
+        For Each roll In chara.saves
+            Form1.lb_Saves.Items.Add(roll.name)
+            If chara.saves(Form1.lb_Saves.Items.Count - 1).roll.Contains("{pb}") Then
+                Dim tempfont As New Font(Form1.lb_Saves.Items(Form1.lb_Saves.Items.Count - 1).Font, FontStyle.Bold)
+                Form1.lb_Saves.Items(Form1.lb_Saves.Items.Count - 1).Font = tempfont
+            End If
+        Next
+    End Sub
 End Module

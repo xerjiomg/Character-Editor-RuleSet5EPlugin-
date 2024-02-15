@@ -1,5 +1,6 @@
 ﻿
 Imports System.Buffers.Text
+Imports System.Drawing.Text
 Imports System.IO
 Imports System.Net.Http
 Imports System.Net.Security
@@ -101,6 +102,7 @@ Public Class Form1
                 dg_Principal.Rows.Add("Int", chara.Int)
                 dg_Principal.Rows.Add("Wis", chara.wis)
                 dg_Principal.Rows.Add("Cha", chara.cha)
+                dg_Principal.Rows.Add("Reach", chara.reach)
                 dg_Principal.Rows.Add("lv", chara.lv)
                 dg_Principal.Rows.Add("var1", chara.var1)
                 dg_Principal.Rows.Add("var2", chara.var2)
@@ -269,12 +271,10 @@ Public Class Form1
 
                 b_checkedchanges = True
 
-                For Each roll In chara.saves
-                    lb_Saves.Items.Add(roll.name)
-                Next
-                For Each roll In chara.skills
-                    lb_Skill.Items.Add(roll.name)
-                Next
+                LoadSavesList()
+
+                LoadSkillsList()
+
                 For Each roll In chara.attacks
                     lb_Attacks.Items.Add(roll.name)
                 Next
@@ -417,8 +417,22 @@ Public Class Form1
                         dg_Principal.Rows(e.RowIndex).Cells(1).Value = chara.var1.ToString
                     End If
                 Case 13
+                    Dim tempIsvalidrole As String = isValidrole(dg_Principal.Rows(e.RowIndex).Cells(1).Value.ToString.Replace(" ", ""))
+                    If tempIsvalidrole = "" Or tempIsvalidrole = "The roll field cannot be empty" Then
+                        chara.var2 = dg_Principal.Rows(e.RowIndex).Cells(1).Value.ToString
+                    Else
+                        MsgBox(tempIsvalidrole, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
+                        dg_Principal.Rows(e.RowIndex).Cells(1).Value = chara.var2.ToString
+                    End If
 
                 Case 14
+                    Dim tempIsvalidrole As String = isValidrole(dg_Principal.Rows(e.RowIndex).Cells(1).Value.ToString.Replace(" ", ""))
+                    If tempIsvalidrole = "" Or tempIsvalidrole = "The roll field cannot be empty" Then
+                        chara.var3 = dg_Principal.Rows(e.RowIndex).Cells(1).Value.ToString
+                    Else
+                        MsgBox(tempIsvalidrole, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
+                        dg_Principal.Rows(e.RowIndex).Cells(1).Value = chara.var3.ToString
+                    End If
 
             End Select
 
@@ -443,7 +457,7 @@ Public Class Form1
             lb_damages.Items.Clear()
             dg_Damages.Rows.Clear()
 
-            If lb_Skill.SelectedIndex <> -1 Then
+            If lb_Skill.SelectedItems.Count > 0 Then
 
                 Dim CBox As New DataGridViewComboBoxCell()
                 ''Chorradas del color
@@ -451,27 +465,45 @@ Public Class Form1
                 CBox.FlatStyle = FlatStyle.Flat
 
                 dg_Rolls.Rows.Add("Type", "")
-                CBox.Items.Add(chara.skills(lb_Skill.SelectedIndex).type.ToString)
+                CBox.Items.Add(chara.skills(lb_Skill.SelectedItems(0).Index).type.ToString)
                 CBox.Items.Add("Public")
                 CBox.Items.Add("Private")
                 CBox.Items.Add("Secret")
                 CBox.Items.Add("Public,GM")
                 CBox.Items.Add("Private,GM")
                 CBox.Items.Add("Secret,GM")
-                CBox.Value = chara.skills(lb_Skill.SelectedIndex).type.ToString
+                CBox.Value = chara.skills(lb_Skill.SelectedItems(0).Index).type.ToString
                 dg_Rolls.Rows(0).Cells(1) = CBox
-                dg_Rolls.Rows.Add("Name", chara.skills(lb_Skill.SelectedIndex).name.ToString)
+                dg_Rolls.Rows.Add("Name", chara.skills(lb_Skill.SelectedItems(0).Index).name.ToString)
                 dg_Rolls.Rows.Add("Range", "")
-                dg_Rolls.Rows.Add("Roll", chara.skills(lb_Skill.SelectedIndex).roll.ToString)
+                dg_Rolls.Rows.Add("Roll", chara.skills(lb_Skill.SelectedItems(0).Index).roll.ToString)
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
-                dg_Rolls.Rows.Add("Info", chara.skills(lb_Skill.SelectedIndex).info.ToString)
+                dg_Rolls.Rows.Add("Info", chara.skills(lb_Skill.SelectedItems(0).Index).info.ToString)
                 dg_Rolls.Rows(2).Visible = False
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
 
+                checkProficencyEvent = False
+
+                If chara.skills(lb_Skill.SelectedItems(0).Index).roll.Contains("{pb}") Then
+                    c_profSkill.Checked = True
+                Else
+                    c_profSkill.Checked = False
+                End If
+                If chara.skills(lb_Skill.SelectedItems(0).Index).roll.Contains("{ex}") Then
+                    c_experSkill.Checked = True
+                Else
+                    c_experSkill.Checked = False
+                End If
+                If chara.skills(lb_Skill.SelectedItems(0).Index).roll.Contains("{ph}") Then
+                    c_profhalfSkill.Checked = True
+                Else
+                    c_profhalfSkill.Checked = False
+                End If
+                checkProficencyEvent = True
             End If
-            b_rolldgcanedit = True
+                b_rolldgcanedit = True
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -485,31 +517,40 @@ Public Class Form1
             dg_Rolls.Rows.Clear()
             lb_damages.Items.Clear()
             dg_Damages.Rows.Clear()
-            If lb_Saves.SelectedIndex <> -1 Then
+            If lb_Saves.SelectedItems.Count > 0 Then
                 Dim CBox As New DataGridViewComboBoxCell()
                 ''Chorradas del color
                 CBox.Style.BackColor = BackColor
                 CBox.FlatStyle = FlatStyle.Flat
 
                 dg_Rolls.Rows.Add("Type", "")
-                CBox.Items.Add(chara.saves(lb_Saves.SelectedIndex).type.ToString)
+                CBox.Items.Add(chara.saves(lb_Saves.SelectedItems(0).Index).type.ToString)
                 CBox.Items.Add("Public")
                 CBox.Items.Add("Private")
                 CBox.Items.Add("Secret")
                 CBox.Items.Add("Public,GM")
                 CBox.Items.Add("Private,GM")
                 CBox.Items.Add("Secret,GM")
-                CBox.Value = chara.saves(lb_Saves.SelectedIndex).type.ToString
+                CBox.Value = chara.saves(lb_Saves.SelectedItems(0).Index).type.ToString
                 dg_Rolls.Rows(0).Cells(1) = CBox
-                dg_Rolls.Rows.Add("Name", chara.saves(lb_Saves.SelectedIndex).name.ToString)
+                dg_Rolls.Rows.Add("Name", chara.saves(lb_Saves.SelectedItems(0).Index).name.ToString)
                 dg_Rolls.Rows.Add("Range", "")
-                dg_Rolls.Rows.Add("Roll", chara.saves(lb_Saves.SelectedIndex).roll.ToString)
+                dg_Rolls.Rows.Add("Roll", chara.saves(lb_Saves.SelectedItems(0).Index).roll.ToString)
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
-                dg_Rolls.Rows.Add("Info", chara.saves(lb_Saves.SelectedIndex).info.ToString)
+                dg_Rolls.Rows.Add("Info", chara.saves(lb_Saves.SelectedItems(0).Index).info.ToString)
                 dg_Rolls.Rows(2).Visible = False
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
+
+                checkProficencyEvent = False
+                If chara.saves(lb_Saves.SelectedItems(0).Index).roll.Contains("{pb}") Then
+                    c_profSaves.Checked = True
+                Else
+                    c_profSaves.Checked = False
+                End If
+                checkProficencyEvent = True
+
             End If
             b_rolldgcanedit = True
         Catch ex As Exception
@@ -686,6 +727,9 @@ Public Class Form1
                     lbc.ClearSelected()
                 End If
             Next
+
+            lb_Saves.SelectedItems.Clear()
+
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -734,6 +778,7 @@ Public Class Form1
                 End If
             Next
 
+            lb_Skill.SelectedItems.Clear()
 
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
@@ -835,6 +880,16 @@ Public Class Form1
                         i_caller = l_caller.SelectedIndex
                     End If
                 Next
+
+                If lb_Skill.SelectedItems.Count > 0 Then
+                    s_caller = lb_Skill.Name
+                    i_caller = lb_Skill.SelectedItems(0).Index
+                End If
+                If lb_Saves.SelectedItems.Count > 0 Then
+                    s_caller = lb_Saves.Name
+                    i_caller = lb_Saves.SelectedItems(0).Index
+                End If
+
 
                 Dim tempRoll As New Roll
                 Select Case s_caller
@@ -978,10 +1033,10 @@ Public Class Form1
                             lb_Heals.Items.Item(lb_Heals.SelectedIndex) = tempRoll.name
                         Case "lb_Skill"
                             chara.skills(i_caller) = tempRoll
-                            lb_Skill.Items.Item(lb_Skill.SelectedIndex) = tempRoll.name
+                            lb_Skill.Items.Item(lb_Skill.SelectedItems(0).Index).Text = tempRoll.name
                         Case "lb_Saves"
                             chara.saves(i_caller) = tempRoll
-                            lb_Saves.Items.Item(lb_Saves.SelectedIndex) = tempRoll.name
+                            lb_Saves.Items.Item(lb_Saves.SelectedItems(0).Index).Text = tempRoll.name
                     End Select
 
                 Else
@@ -1052,6 +1107,16 @@ Public Class Form1
                         i_caller = l_caller.SelectedIndex
                     End If
                 Next
+
+                If lb_Skill.SelectedItems.Count > 0 Then
+                    s_caller = lb_Skill.Name
+                    i_caller = lb_Skill.SelectedItems(0).Index
+                End If
+                If lb_Saves.SelectedItems.Count > 0 Then
+                    s_caller = lb_Saves.Name
+                    i_caller = lb_Saves.SelectedItems(0).Index
+                End If
+
 
                 Dim tempRoll As New Roll
                 Select Case s_caller
@@ -1247,7 +1312,6 @@ Public Class Form1
                             For Each temp As String In chara.vulnerability
                                 If temp = a_senderBox(2).Replace("0", " ").ToLower Then
                                     b_reschange = True
-
                                 End If
                             Next
                             If b_reschange = True Then
@@ -1271,9 +1335,9 @@ Public Class Form1
             baseroll.roll = "1D20+0"
             chara.skills.Add(baseroll)
             lb_Skill.Items.Clear()
-            For Each roll In chara.skills
-                lb_Skill.Items.Add(roll.name)
-            Next
+
+            LoadSkillsList()
+
             actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
@@ -1282,13 +1346,12 @@ Public Class Form1
 
     Private Sub b_skills_delete_Click(sender As Object, e As EventArgs) Handles b_skills_delete.Click
         Try
-            If lb_Skill.SelectedIndex <> -1 Then
-                chara.skills.RemoveAt(lb_Skill.SelectedIndex)
+            If lb_Skill.SelectedItems(0).Index <> -1 Then
+                chara.skills.RemoveAt(lb_Skill.SelectedItems(0).Index)
                 dg_Rolls.Rows.Clear()
                 lb_Skill.Items.Clear()
-                For Each roll In chara.skills
-                    lb_Skill.Items.Add(roll.name)
-                Next
+
+                LoadSkillsList()
             Else
                 MsgBox("There is no item selected in the list", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
             End If
@@ -1382,9 +1445,7 @@ Public Class Form1
             baseroll.roll = "1D20+0"
             chara.saves.Add(baseroll)
             lb_Saves.Items.Clear()
-            For Each roll In chara.saves
-                lb_Saves.Items.Add(roll.name)
-            Next
+            LoadSavesList()
 
             actualizarJsonText()
         Catch ex As Exception
@@ -1456,13 +1517,11 @@ Public Class Form1
 
     Private Sub b_saves_delete_Click(sender As Object, e As EventArgs) Handles b_saves_delete.Click
         Try
-            If lb_Saves.SelectedIndex <> -1 Then
-                chara.saves.RemoveAt(lb_Saves.SelectedIndex)
+            If lb_Saves.SelectedItems.Count > 0 Then
+                chara.saves.RemoveAt(lb_Saves.SelectedItems(0).Index)
                 dg_Rolls.Rows.Clear()
                 lb_Saves.Items.Clear()
-                For Each roll In chara.saves
-                    lb_Saves.Items.Add(roll.name)
-                Next
+                LoadSavesList()
             Else
                 MsgBox("There is no item selected in the list", MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
             End If
@@ -1488,6 +1547,12 @@ Public Class Form1
                     s_caller = l_caller.Name
                 End If
             Next
+            If lb_Skill.SelectedItems.Count > 0 Then
+                s_caller = lb_Skill.Name
+            End If
+            If lb_Saves.SelectedItems.Count > 0 Then
+                s_caller = lb_Saves.Name
+            End If
 
             Dim icount As Integer = 0
 
@@ -1571,6 +1636,12 @@ Public Class Form1
                     s_caller = l_caller.Name
                 End If
             Next
+            If lb_Skill.SelectedItems.Count > 0 Then
+                s_caller = lb_Skill.Name
+            End If
+            If lb_Saves.SelectedItems.Count > 0 Then
+                s_caller = lb_Saves.Name
+            End If
             If lb_damages.SelectedIndex <> -1 Then
                 Select Case s_caller
                     Case "lb_Attacks"
@@ -1659,24 +1730,23 @@ Public Class Form1
 
     Private Sub b_skills_up_Click(sender As Object, e As EventArgs) Handles b_skills_up.Click
         Try
-            If lb_Skill.SelectedIndex <> -1 Then
-                If lb_Skill.SelectedIndex > 0 Then
-                    Dim indi As Integer = lb_Skill.SelectedIndex - 1
+            If lb_Skill.SelectedItems.Count > 0 Then
+                If lb_Skill.SelectedItems(0).Index > 0 Then
+                    Dim indi As Integer = lb_Skill.SelectedItems(0).Index - 1
                     Dim temproll_u As New Roll
                     Dim temproll_d As New Roll
-                    temproll_d = New Roll(chara.skills(lb_Skill.SelectedIndex - 1))
-                    temproll_u = New Roll(chara.skills(lb_Skill.SelectedIndex))
-                    chara.skills(lb_Skill.SelectedIndex - 1) = temproll_u
-                    chara.skills(lb_Skill.SelectedIndex) = temproll_d
+                    temproll_d = New Roll(chara.skills(lb_Skill.SelectedItems(0).Index - 1))
+                    temproll_u = New Roll(chara.skills(lb_Skill.SelectedItems(0).Index))
+                    chara.skills(lb_Skill.SelectedItems(0).Index - 1) = temproll_u
+                    chara.skills(lb_Skill.SelectedItems(0).Index) = temproll_d
                     lb_Skill.Items.Clear()
-                    For Each roll In chara.skills
-                        lb_Skill.Items.Add(roll.name)
-                    Next
-                    lb_Skill.SetSelected(indi, True)
+
+                    LoadSkillsList()
+                    lb_Skill.Items(indi).Selected = True
                 End If
             End If
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1684,22 +1754,23 @@ Public Class Form1
 
     Private Sub b_skills_down_Click(sender As Object, e As EventArgs) Handles b_skills_down.Click
         Try
-            If lb_Skill.SelectedIndex <> -1 Then
-                If lb_Skill.SelectedIndex < lb_Skill.Items.Count - 1 Then
-                    Dim indi As Integer = lb_Skill.SelectedIndex + 1
+            If lb_Skill.SelectedItems.Count > 0 Then
+                If lb_Skill.SelectedItems(0).Index < lb_Skill.Items.Count - 1 Then
+                    Dim indi As Integer = lb_Skill.SelectedItems(0).Index + 1
                     Dim temproll_u As New Roll
                     Dim temproll_d As New Roll
-                    temproll_d = New Roll(chara.skills(lb_Skill.SelectedIndex + 1))
-                    temproll_u = New Roll(chara.skills(lb_Skill.SelectedIndex))
-                    chara.skills(lb_Skill.SelectedIndex + 1) = temproll_u
-                    chara.skills(lb_Skill.SelectedIndex) = temproll_d
+                    temproll_d = New Roll(chara.skills(lb_Skill.SelectedItems(0).Index + 1))
+                    temproll_u = New Roll(chara.skills(lb_Skill.SelectedItems(0).Index))
+                    chara.skills(lb_Skill.SelectedItems(0).Index + 1) = temproll_u
+                    chara.skills(lb_Skill.SelectedItems(0).Index) = temproll_d
                     lb_Skill.Items.Clear()
-                    For Each roll In chara.skills
-                        lb_Skill.Items.Add(roll.name)
-                    Next
-                    lb_Skill.SetSelected(indi, True)
+
+                    LoadSkillsList()
+
+                    lb_Skill.Items(indi).Selected = True
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1724,7 +1795,7 @@ Public Class Form1
                 End If
             End If
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1748,6 +1819,7 @@ Public Class Form1
                     lb_DCAttacks.SetSelected(indi, True)
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1771,6 +1843,7 @@ Public Class Form1
                     lb_Heals.SetSelected(indi, True)
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1778,22 +1851,22 @@ Public Class Form1
 
     Private Sub b_saves_up_Click(sender As Object, e As EventArgs) Handles b_saves_up.Click
         Try
-            If lb_Saves.SelectedIndex <> -1 Then
-                If lb_Saves.SelectedIndex > 0 Then
-                    Dim indi As Integer = lb_Saves.SelectedIndex - 1
+            If lb_Saves.SelectedItems.Count > 0 Then
+                If lb_Saves.SelectedItems(0).Index > 0 Then
+                    Dim indi As Integer = lb_Saves.SelectedItems(0).Index - 1
                     Dim temproll_u As New Roll
                     Dim temproll_d As New Roll
-                    temproll_d = New Roll(chara.saves(lb_Saves.SelectedIndex - 1))
-                    temproll_u = New Roll(chara.saves(lb_Saves.SelectedIndex))
-                    chara.saves(lb_Saves.SelectedIndex - 1) = temproll_u
-                    chara.saves(lb_Saves.SelectedIndex) = temproll_d
+                    temproll_d = New Roll(chara.saves(lb_Saves.SelectedItems(0).Index - 1))
+                    temproll_u = New Roll(chara.saves(lb_Saves.SelectedItems(0).Index))
+                    chara.saves(lb_Saves.SelectedItems(0).Index - 1) = temproll_u
+                    chara.saves(lb_Saves.SelectedItems(0).Index) = temproll_d
                     lb_Saves.Items.Clear()
-                    For Each roll In chara.saves
-                        lb_Saves.Items.Add(roll.name)
-                    Next
-                    lb_Saves.SetSelected(indi, True)
+
+                    LoadSavesList()
+                    lb_Saves.Items(indi).Selected = True
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1817,6 +1890,7 @@ Public Class Form1
                     lb_Attacks.SetSelected(indi, True)
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1840,7 +1914,7 @@ Public Class Form1
                     lb_DCAttacks.SetSelected(indi, True)
                 End If
             End If
-
+            actualizarJsonText()
 
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
@@ -1865,6 +1939,7 @@ Public Class Form1
                     lb_Heals.SetSelected(indi, True)
                 End If
             End If
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1872,24 +1947,23 @@ Public Class Form1
 
     Private Sub b_saves_down_Click(sender As Object, e As EventArgs) Handles b_saves_down.Click
         Try
-            If lb_Saves.SelectedIndex <> -1 Then
-                If lb_Saves.SelectedIndex < lb_Saves.Items.Count - 1 Then
-                    Dim indi As Integer = lb_Saves.SelectedIndex + 1
+            If lb_Saves.SelectedItems.Count > 0 Then
+                If lb_Saves.SelectedItems(0).Index < lb_Saves.Items.Count - 1 Then
+                    Dim indi As Integer = lb_Saves.SelectedItems(0).Index + 1
                     Dim temproll_u As New Roll
                     Dim temproll_d As New Roll
-                    temproll_d = New Roll(chara.saves(lb_Saves.SelectedIndex + 1))
-                    temproll_u = New Roll(chara.saves(lb_Saves.SelectedIndex))
-                    chara.saves(lb_Saves.SelectedIndex + 1) = temproll_u
-                    chara.saves(lb_Saves.SelectedIndex) = temproll_d
+                    temproll_d = New Roll(chara.saves(lb_Saves.SelectedItems(0).Index + 1))
+                    temproll_u = New Roll(chara.saves(lb_Saves.SelectedItems(0).Index))
+                    chara.saves(lb_Saves.SelectedItems(0).Index + 1) = temproll_u
+                    chara.saves(lb_Saves.SelectedItems(0).Index) = temproll_d
                     lb_Saves.Items.Clear()
-                    For Each roll In chara.saves
-                        lb_Saves.Items.Add(roll.name)
-                    Next
-                    lb_Saves.SetSelected(indi, True)
+
+                    LoadSavesList()
+                    lb_Saves.Items(indi).Selected = True
                 End If
             End If
 
-
+            actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
         End Try
@@ -1901,9 +1975,9 @@ Public Class Form1
             T_DefaultAPath.Text = My.Settings.spellPath
             alllists.Add(lb_Attacks)
             alllists.Add(lb_DCAttacks)
-            alllists.Add(lb_Skill)
+            'alllists.Add(lb_Skill)
             alllists.Add(lb_Heals)
-            alllists.Add(lb_Saves)
+            'alllists.Add(lb_Saves)
             ''b_addc.BackColor = Color.LightGray
             b_addat.BackColor = Color.LightGray
             b_adheal.BackColor = Color.LightGray
@@ -2109,12 +2183,10 @@ Public Class Form1
 
                 b_checkedchanges = True
 
-                For Each roll In chara.saves
-                    lb_Saves.Items.Add(roll.name)
-                Next
-                For Each roll In chara.skills
-                    lb_Skill.Items.Add(roll.name)
-                Next
+                LoadSavesList()
+
+                LoadSkillsList()
+
                 For Each roll In chara.attacks
                     lb_Attacks.Items.Add(roll.name)
                 Next
@@ -2315,6 +2387,110 @@ Public Class Form1
     Private Sub T_DefaultAPath_TextChanged(sender As Object, e As EventArgs) Handles T_DefaultAPath.TextChanged
         If T_DefaultAPath.Text <> My.Settings.spellPath Then
             My.Settings.spellPath = T_DefaultAPath.Text
+        End If
+    End Sub
+    Private Sub c_profSkill_CheckedChanged(sender As Object, e As EventArgs) Handles c_profSkill.CheckedChanged
+        If checkProficencyEvent = True Then
+            If lb_Skill.SelectedItems.Count > 0 Then
+                If c_profSkill.Checked = True Then
+                    If Not chara.skills(lb_Skill.SelectedItems(0).Index).roll.Contains("{pb}") Then
+                        chara.skills(lb_Skill.SelectedItems(0).Index).roll = chara.skills(lb_Skill.SelectedItems(0).Index).roll + "+{pb}"
+                        Dim tempfont As New Font(lb_Skill.Items(lb_Skill.Items.Count - 1).Font, FontStyle.Bold)
+                        lb_Skill.Items(lb_Skill.SelectedItems(0).Index).Font = tempfont
+                    End If
+                Else
+                    chara.skills(lb_Skill.SelectedItems(0).Index).roll = chara.skills(lb_Skill.SelectedItems(0).Index).roll.Replace("+{pb}", "")
+                    Dim tempfont As New Font(lb_Skill.Items(lb_Skill.Items.Count - 1).Font, FontStyle.Regular)
+                    lb_Skill.Items(lb_Skill.SelectedItems(0).Index).Font = tempfont
+                End If
+
+                Dim tempindex As Integer = lb_Skill.SelectedItems(0).Index
+
+                lb_Skill.SelectedItems.Clear()
+                lb_Skill.SelectedIndices.Add(tempindex)
+
+                actualizarJsonText()
+            End If
+        End If
+    End Sub
+
+    Private Sub c_experSkill_CheckedChanged(sender As Object, e As EventArgs) Handles c_experSkill.CheckedChanged
+        If checkProficencyEvent = True Then
+            If lb_Skill.SelectedItems.Count > 0 Then
+                If c_experSkill.Checked = True Then
+                    If Not chara.skills(lb_Skill.SelectedItems(0).Index).roll.Contains("{ex}") Then
+                        chara.skills(lb_Skill.SelectedItems(0).Index).roll = chara.skills(lb_Skill.SelectedItems(0).Index).roll + "+{ex}"
+                        Dim tempfont As New Font(lb_Skill.Items(lb_Skill.Items.Count - 1).Font, FontStyle.Bold)
+                        lb_Skill.Items(lb_Skill.SelectedItems(0).Index).Font = tempfont
+                        lb_Skill.Items(lb_Skill.SelectedItems(0).Index).ForeColor = Color.Red
+                    End If
+                Else
+                    chara.skills(lb_Skill.SelectedItems(0).Index).roll = chara.skills(lb_Skill.SelectedItems(0).Index).roll.Replace("+{ex}", "")
+                    Dim tempfont As New Font(lb_Skill.Items(lb_Skill.Items.Count - 1).Font, FontStyle.Regular)
+                    lb_Skill.Items(lb_Skill.SelectedItems(0).Index).Font = tempfont
+                    lb_Skill.Items(lb_Skill.SelectedItems(0).Index).ForeColor = Color.Black
+                End If
+
+                Dim tempindex As Integer = lb_Skill.SelectedItems(0).Index
+
+                lb_Skill.SelectedItems.Clear()
+                lb_Skill.SelectedIndices.Add(tempindex)
+
+                actualizarJsonText()
+            End If
+        End If
+
+    End Sub
+
+    Private Sub c_profhalfSkill_CheckedChanged(sender As Object, e As EventArgs) Handles c_profhalfSkill.CheckedChanged
+        If checkProficencyEvent = True Then
+            If lb_Skill.SelectedItems.Count > 0 Then
+                If c_profhalfSkill.Checked = True Then
+                    If Not chara.skills(lb_Skill.SelectedItems(0).Index).roll.Contains("{ph}") Then
+                        chara.skills(lb_Skill.SelectedItems(0).Index).roll = chara.skills(lb_Skill.SelectedItems(0).Index).roll + "+{ph}"
+                        Dim tempfont As New Font(lb_Skill.Items(lb_Skill.Items.Count - 1).Font, FontStyle.Bold)
+                        lb_Skill.Items(lb_Skill.SelectedItems(0).Index).Font = tempfont
+                        lb_Skill.Items(lb_Skill.SelectedItems(0).Index).ForeColor = Color.Sienna
+                    End If
+                Else
+                    chara.skills(lb_Skill.SelectedItems(0).Index).roll = chara.skills(lb_Skill.SelectedItems(0).Index).roll.Replace("+{ph}", "")
+                    Dim tempfont As New Font(lb_Skill.Items(lb_Skill.Items.Count - 1).Font, FontStyle.Regular)
+                    lb_Skill.Items(lb_Skill.SelectedItems(0).Index).Font = tempfont
+                    lb_Skill.Items(lb_Skill.SelectedItems(0).Index).ForeColor = Color.Black
+                End If
+
+                Dim tempindex As Integer = lb_Skill.SelectedItems(0).Index
+
+                lb_Skill.SelectedItems.Clear()
+                lb_Skill.SelectedIndices.Add(tempindex)
+
+                actualizarJsonText()
+            End If
+        End If
+    End Sub
+
+    Private Sub c_profSaves_CheckedChanged(sender As Object, e As EventArgs) Handles c_profSaves.CheckedChanged
+        If checkProficencyEvent = True Then
+            If lb_Saves.SelectedItems.Count > 0 Then
+                If c_profSaves.Checked = True Then
+                    If Not chara.saves(lb_Saves.SelectedItems(0).Index).roll.Contains("{pb}") Then
+                        chara.saves(lb_Saves.SelectedItems(0).Index).roll = chara.saves(lb_Saves.SelectedItems(0).Index).roll + "+{pb}"
+                        Dim tempfont As New Font(lb_Saves.Items(lb_Saves.Items.Count - 1).Font, FontStyle.Bold)
+                        lb_Saves.Items(lb_Saves.SelectedItems(0).Index).Font = tempfont
+                    End If
+                Else
+                    chara.saves(lb_Saves.SelectedItems(0).Index).roll = chara.saves(lb_Saves.SelectedItems(0).Index).roll.Replace("+{pb}", "")
+                    Dim tempfont As New Font(lb_Saves.Items(lb_Saves.Items.Count - 1).Font, FontStyle.Regular)
+                    lb_Saves.Items(lb_Saves.SelectedItems(0).Index).Font = tempfont
+                End If
+
+                Dim tempindex As Integer = lb_Saves.SelectedItems(0).Index
+
+                lb_Saves.SelectedItems.Clear()
+                lb_Saves.SelectedIndices.Add(tempindex)
+
+                actualizarJsonText()
+            End If
         End If
     End Sub
 End Class

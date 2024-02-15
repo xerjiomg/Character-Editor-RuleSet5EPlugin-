@@ -9,8 +9,8 @@
     <MyType>WindowsForms</MyType>
     <ApplicationIcon>xj_talespire.ico</ApplicationIcon>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.4.2.0</AssemblyVersion>
-    <FileVersion>1.4.2.0</FileVersion>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

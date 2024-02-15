@@ -116,8 +116,6 @@ Partial Class Form1
         Me.cb_resist_Slashing = New System.Windows.Forms.CheckBox()
         Me.cb_resist_Piercing = New System.Windows.Forms.CheckBox()
         Me.cb_resist_Bludgeoning = New System.Windows.Forms.CheckBox()
-        Me.lb_Saves = New System.Windows.Forms.ListBox()
-        Me.lb_Skill = New System.Windows.Forms.ListBox()
         Me.lb_Attacks = New System.Windows.Forms.ListBox()
         Me.lb_DCAttacks = New System.Windows.Forms.ListBox()
         Me.lb_Heals = New System.Windows.Forms.ListBox()
@@ -136,11 +134,16 @@ Partial Class Form1
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.lb_Saves = New System.Windows.Forms.ListView()
         Me.b_saves_down = New System.Windows.Forms.Button()
         Me.b_saves_delete = New System.Windows.Forms.Button()
         Me.b_saves_add = New System.Windows.Forms.Button()
         Me.b_saves_up = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.lb_Skill = New System.Windows.Forms.ListView()
+        Me.c_profhalfSkill = New System.Windows.Forms.CheckBox()
+        Me.c_experSkill = New System.Windows.Forms.CheckBox()
+        Me.c_profSkill = New System.Windows.Forms.CheckBox()
         Me.b_skills_add = New System.Windows.Forms.Button()
         Me.b_skills_delete = New System.Windows.Forms.Button()
         Me.b_skills_up = New System.Windows.Forms.Button()
@@ -180,6 +183,7 @@ Partial Class Form1
         Me.b_addat = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.c_profSaves = New System.Windows.Forms.CheckBox()
         CType(Me.dg_Principal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_resi.SuspendLayout()
         CType(Me.dg_Damages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1088,30 +1092,6 @@ Partial Class Form1
         Me.cb_resist_Bludgeoning.TabIndex = 0
         Me.cb_resist_Bludgeoning.UseVisualStyleBackColor = True
         '
-        'lb_Saves
-        '
-        Me.lb_Saves.BackColor = System.Drawing.Color.Snow
-        Me.lb_Saves.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.lb_Saves.FormattingEnabled = True
-        Me.lb_Saves.ItemHeight = 15
-        Me.lb_Saves.Location = New System.Drawing.Point(3, 16)
-        Me.lb_Saves.Name = "lb_Saves"
-        Me.lb_Saves.Size = New System.Drawing.Size(317, 394)
-        Me.lb_Saves.TabIndex = 4
-        Me.lb_Saves.Tag = "05"
-        '
-        'lb_Skill
-        '
-        Me.lb_Skill.BackColor = System.Drawing.Color.Snow
-        Me.lb_Skill.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.lb_Skill.FormattingEnabled = True
-        Me.lb_Skill.ItemHeight = 15
-        Me.lb_Skill.Location = New System.Drawing.Point(3, 16)
-        Me.lb_Skill.Name = "lb_Skill"
-        Me.lb_Skill.Size = New System.Drawing.Size(317, 394)
-        Me.lb_Skill.TabIndex = 5
-        Me.lb_Skill.Tag = "01"
-        '
         'lb_Attacks
         '
         Me.lb_Attacks.BackColor = System.Drawing.Color.Snow
@@ -1344,6 +1324,7 @@ Partial Class Form1
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.Snow
+        Me.TabPage2.Controls.Add(Me.c_profSaves)
         Me.TabPage2.Controls.Add(Me.lb_Saves)
         Me.TabPage2.Controls.Add(Me.b_saves_down)
         Me.TabPage2.Controls.Add(Me.b_saves_delete)
@@ -1355,6 +1336,18 @@ Partial Class Form1
         Me.TabPage2.Size = New System.Drawing.Size(323, 413)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Saves"
+        '
+        'lb_Saves
+        '
+        Me.lb_Saves.BackColor = System.Drawing.Color.Snow
+        Me.lb_Saves.Location = New System.Drawing.Point(0, 17)
+        Me.lb_Saves.MultiSelect = False
+        Me.lb_Saves.Name = "lb_Saves"
+        Me.lb_Saves.Size = New System.Drawing.Size(323, 368)
+        Me.lb_Saves.TabIndex = 80
+        Me.lb_Saves.TileSize = New System.Drawing.Size(228, 17)
+        Me.lb_Saves.UseCompatibleStateImageBehavior = False
+        Me.lb_Saves.View = System.Windows.Forms.View.Tile
         '
         'b_saves_down
         '
@@ -1402,6 +1395,9 @@ Partial Class Form1
         '
         Me.TabPage3.BackColor = System.Drawing.Color.Snow
         Me.TabPage3.Controls.Add(Me.lb_Skill)
+        Me.TabPage3.Controls.Add(Me.c_profhalfSkill)
+        Me.TabPage3.Controls.Add(Me.c_experSkill)
+        Me.TabPage3.Controls.Add(Me.c_profSkill)
         Me.TabPage3.Controls.Add(Me.b_skills_add)
         Me.TabPage3.Controls.Add(Me.b_skills_delete)
         Me.TabPage3.Controls.Add(Me.b_skills_up)
@@ -1412,6 +1408,51 @@ Partial Class Form1
         Me.TabPage3.Size = New System.Drawing.Size(323, 413)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Skills"
+        '
+        'lb_Skill
+        '
+        Me.lb_Skill.BackColor = System.Drawing.Color.Snow
+        Me.lb_Skill.Location = New System.Drawing.Point(3, 18)
+        Me.lb_Skill.MultiSelect = False
+        Me.lb_Skill.Name = "lb_Skill"
+        Me.lb_Skill.Size = New System.Drawing.Size(320, 366)
+        Me.lb_Skill.TabIndex = 75
+        Me.lb_Skill.TileSize = New System.Drawing.Size(228, 17)
+        Me.lb_Skill.UseCompatibleStateImageBehavior = False
+        Me.lb_Skill.View = System.Windows.Forms.View.Tile
+        '
+        'c_profhalfSkill
+        '
+        Me.c_profhalfSkill.AutoSize = True
+        Me.c_profhalfSkill.ForeColor = System.Drawing.Color.Sienna
+        Me.c_profhalfSkill.Location = New System.Drawing.Point(202, 390)
+        Me.c_profhalfSkill.Name = "c_profhalfSkill"
+        Me.c_profhalfSkill.Size = New System.Drawing.Size(107, 19)
+        Me.c_profhalfSkill.TabIndex = 74
+        Me.c_profhalfSkill.Text = "Half Proficency"
+        Me.c_profhalfSkill.UseVisualStyleBackColor = True
+        '
+        'c_experSkill
+        '
+        Me.c_experSkill.AutoSize = True
+        Me.c_experSkill.ForeColor = System.Drawing.Color.Red
+        Me.c_experSkill.Location = New System.Drawing.Point(111, 390)
+        Me.c_experSkill.Name = "c_experSkill"
+        Me.c_experSkill.Size = New System.Drawing.Size(73, 19)
+        Me.c_experSkill.TabIndex = 73
+        Me.c_experSkill.Text = "Expertise"
+        Me.c_experSkill.UseVisualStyleBackColor = True
+        '
+        'c_profSkill
+        '
+        Me.c_profSkill.AutoSize = True
+        Me.c_profSkill.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.c_profSkill.Location = New System.Drawing.Point(10, 390)
+        Me.c_profSkill.Name = "c_profSkill"
+        Me.c_profSkill.Size = New System.Drawing.Size(85, 19)
+        Me.c_profSkill.TabIndex = 72
+        Me.c_profSkill.Text = "Proficency"
+        Me.c_profSkill.UseVisualStyleBackColor = True
         '
         'b_skills_add
         '
@@ -1826,11 +1867,11 @@ Partial Class Form1
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point)
-        Me.Label15.Location = New System.Drawing.Point(32, 3)
+        Me.Label15.Location = New System.Drawing.Point(37, 3)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(97, 15)
+        Me.Label15.Size = New System.Drawing.Size(81, 15)
         Me.Label15.TabIndex = 68
-        Me.Label15.Text = "Add to Character"
+        Me.Label15.Text = "Import Action"
         '
         'Button4
         '
@@ -1841,6 +1882,17 @@ Partial Class Form1
         Me.Button4.TabIndex = 65
         Me.Button4.Text = "New"
         Me.Button4.UseVisualStyleBackColor = True
+        '
+        'c_profSaves
+        '
+        Me.c_profSaves.AutoSize = True
+        Me.c_profSaves.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.c_profSaves.Location = New System.Drawing.Point(111, 391)
+        Me.c_profSaves.Name = "c_profSaves"
+        Me.c_profSaves.Size = New System.Drawing.Size(85, 19)
+        Me.c_profSaves.TabIndex = 81
+        Me.c_profSaves.Text = "Proficency"
+        Me.c_profSaves.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -1863,7 +1915,9 @@ Partial Class Form1
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage6.ResumeLayout(False)
@@ -1931,8 +1985,6 @@ Partial Class Form1
     Friend WithEvents cb_resist_Slashing As CheckBox
     Friend WithEvents cb_resist_Piercing As CheckBox
     Friend WithEvents cb_resist_Bludgeoning As CheckBox
-    Friend WithEvents lb_Saves As ListBox
-    Friend WithEvents lb_Skill As ListBox
     Friend WithEvents lb_Attacks As ListBox
     Friend WithEvents lb_DCAttacks As ListBox
     Friend WithEvents lb_Heals As ListBox
@@ -2023,4 +2075,10 @@ Partial Class Form1
     Friend WithEvents T_DefaultAPath As TextBox
     Friend WithEvents Label37 As Label
     Friend WithEvents Label36 As Label
+    Friend WithEvents c_profhalfSkill As CheckBox
+    Friend WithEvents c_experSkill As CheckBox
+    Friend WithEvents c_profSkill As CheckBox
+    Friend WithEvents lb_Skill As ListView
+    Friend WithEvents lb_Saves As ListView
+    Friend WithEvents c_profSaves As CheckBox
 End Class
