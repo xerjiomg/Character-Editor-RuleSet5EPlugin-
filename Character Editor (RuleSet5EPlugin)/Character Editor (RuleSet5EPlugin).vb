@@ -480,6 +480,7 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
                 dg_Rolls.Rows.Add("Info", chara.skills(lb_Skill.SelectedItems(0).Index).info.ToString)
+                dg_Rolls.Rows.Add("menuUI", chara.skills(lb_Skill.SelectedItems(0).Index).menuUI.ToString)
                 dg_Rolls.Rows(2).Visible = False
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
@@ -539,6 +540,7 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
                 dg_Rolls.Rows.Add("Info", chara.saves(lb_Saves.SelectedItems(0).Index).info.ToString)
+                dg_Rolls.Rows.Add("menuUI", chara.saves(lb_Saves.SelectedItems(0).Index).menuUI.ToString)
                 dg_Rolls.Rows(2).Visible = False
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
@@ -588,6 +590,7 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Range Min", chara.attacks(lb_Attacks.SelectedIndex).critrangemin.ToString)
                 dg_Rolls.Rows.Add("Info", chara.attacks(lb_Attacks.SelectedIndex).info.ToString)
                 dg_Rolls.Rows.Add("futureUse_icon", chara.attacks(lb_Attacks.SelectedIndex).futureUse_icon.ToString)
+                dg_Rolls.Rows.Add("menuUI", chara.attacks(lb_Attacks.SelectedIndex).menuUI.ToString)
                 If dg_Rolls.Rows(2).Cells(1).Value = "" Then
                     dg_Rolls.Rows(2).Cells(1).Value = "5/5"
                 End If
@@ -651,6 +654,7 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Range Min", chara.attacksDC(lb_DCAttacks.SelectedIndex).critrangemin.ToString)
                 dg_Rolls.Rows.Add("Info", chara.attacksDC(lb_DCAttacks.SelectedIndex).info.ToString)
                 dg_Rolls.Rows.Add("futureUse_icon", chara.attacksDC(lb_DCAttacks.SelectedIndex).futureUse_icon.ToString)
+                dg_Rolls.Rows.Add("menuUI", chara.attacksDC(lb_DCAttacks.SelectedIndex).menuUI.ToString)
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
                 If dg_Rolls.Rows(2).Cells(1).Value = "" Then
@@ -708,6 +712,7 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
                 dg_Rolls.Rows.Add("Info", chara.healing(lb_Heals.SelectedIndex).info.ToString)
+                dg_Rolls.Rows.Add("menuUI", chara.healing(lb_Heals.SelectedIndex).menuUI.ToString)
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
                 If dg_Rolls.Rows(2).Cells(1).Value = "" Then
@@ -1019,6 +1024,8 @@ Public Class Form1
                             tempRoll.info = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
                         Case 7
                             tempRoll.futureUse_icon = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
+                        Case 8
+                            tempRoll.menuUI = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
                     End Select
 
                     Select Case s_caller

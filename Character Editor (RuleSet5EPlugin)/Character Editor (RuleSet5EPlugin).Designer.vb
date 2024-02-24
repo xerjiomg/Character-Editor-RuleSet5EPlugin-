@@ -134,6 +134,7 @@ Partial Class Form1
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.c_profSaves = New System.Windows.Forms.CheckBox()
         Me.lb_Saves = New System.Windows.Forms.ListView()
         Me.b_saves_down = New System.Windows.Forms.Button()
         Me.b_saves_delete = New System.Windows.Forms.Button()
@@ -183,7 +184,6 @@ Partial Class Form1
         Me.b_addat = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.c_profSaves = New System.Windows.Forms.CheckBox()
         CType(Me.dg_Principal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_resi.SuspendLayout()
         CType(Me.dg_Damages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1147,7 +1147,7 @@ Partial Class Form1
         Me.dg_Damages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dg_Damages.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
         Me.dg_Damages.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.dg_Damages.Location = New System.Drawing.Point(0, 289)
+        Me.dg_Damages.Location = New System.Drawing.Point(0, 316)
         Me.dg_Damages.MultiSelect = False
         Me.dg_Damages.Name = "dg_Damages"
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1160,7 +1160,7 @@ Partial Class Form1
         Me.dg_Damages.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dg_Damages.RowHeadersVisible = False
         Me.dg_Damages.RowTemplate.Height = 20
-        Me.dg_Damages.Size = New System.Drawing.Size(383, 154)
+        Me.dg_Damages.Size = New System.Drawing.Size(383, 127)
         Me.dg_Damages.TabIndex = 62
         '
         'DataGridViewTextBoxColumn3
@@ -1184,7 +1184,7 @@ Partial Class Form1
         '
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.Label22.Location = New System.Drawing.Point(153, 203)
+        Me.Label22.Location = New System.Drawing.Point(153, 231)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(63, 17)
         Me.Label22.TabIndex = 61
@@ -1196,7 +1196,7 @@ Partial Class Form1
         Me.lb_damages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lb_damages.FormattingEnabled = True
         Me.lb_damages.ItemHeight = 15
-        Me.lb_damages.Location = New System.Drawing.Point(0, 221)
+        Me.lb_damages.Location = New System.Drawing.Point(0, 251)
         Me.lb_damages.Name = "lb_damages"
         Me.lb_damages.Size = New System.Drawing.Size(384, 62)
         Me.lb_damages.TabIndex = 61
@@ -1218,7 +1218,7 @@ Partial Class Form1
         'b_damages_delete
         '
         Me.b_damages_delete.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.b_damages_delete.Location = New System.Drawing.Point(29, 200)
+        Me.b_damages_delete.Location = New System.Drawing.Point(29, 228)
         Me.b_damages_delete.Name = "b_damages_delete"
         Me.b_damages_delete.Size = New System.Drawing.Size(39, 23)
         Me.b_damages_delete.TabIndex = 70
@@ -1228,7 +1228,7 @@ Partial Class Form1
         'b_damages_add
         '
         Me.b_damages_add.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.b_damages_add.Location = New System.Drawing.Point(0, 200)
+        Me.b_damages_add.Location = New System.Drawing.Point(0, 228)
         Me.b_damages_add.Name = "b_damages_add"
         Me.b_damages_add.Size = New System.Drawing.Size(32, 23)
         Me.b_damages_add.TabIndex = 70
@@ -1266,7 +1266,7 @@ Partial Class Form1
         Me.dg_Rolls.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.dg_Rolls.RowHeadersVisible = False
         Me.dg_Rolls.RowTemplate.Height = 20
-        Me.dg_Rolls.Size = New System.Drawing.Size(383, 195)
+        Me.dg_Rolls.Size = New System.Drawing.Size(383, 222)
         Me.dg_Rolls.TabIndex = 61
         '
         'DataGridViewTextBoxColumn1
@@ -1336,6 +1336,17 @@ Partial Class Form1
         Me.TabPage2.Size = New System.Drawing.Size(323, 413)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Saves"
+        '
+        'c_profSaves
+        '
+        Me.c_profSaves.AutoSize = True
+        Me.c_profSaves.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.c_profSaves.Location = New System.Drawing.Point(111, 391)
+        Me.c_profSaves.Name = "c_profSaves"
+        Me.c_profSaves.Size = New System.Drawing.Size(85, 19)
+        Me.c_profSaves.TabIndex = 81
+        Me.c_profSaves.Text = "Proficency"
+        Me.c_profSaves.UseVisualStyleBackColor = True
         '
         'lb_Saves
         '
@@ -1882,17 +1893,6 @@ Partial Class Form1
         Me.Button4.TabIndex = 65
         Me.Button4.Text = "New"
         Me.Button4.UseVisualStyleBackColor = True
-        '
-        'c_profSaves
-        '
-        Me.c_profSaves.AutoSize = True
-        Me.c_profSaves.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.c_profSaves.Location = New System.Drawing.Point(111, 391)
-        Me.c_profSaves.Name = "c_profSaves"
-        Me.c_profSaves.Size = New System.Drawing.Size(85, 19)
-        Me.c_profSaves.TabIndex = 81
-        Me.c_profSaves.Text = "Proficency"
-        Me.c_profSaves.UseVisualStyleBackColor = True
         '
         'Form1
         '

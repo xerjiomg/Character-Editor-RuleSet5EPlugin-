@@ -51,6 +51,8 @@ Namespace XJ
             Public Property info As String = ""
             <DefaultValue("")>
             Public Property futureUse_icon As String = ""
+            <DefaultValue("")>
+            Public Property menuUI As String = ""
             Public Property link As Roll = Nothing
 
             Public Sub New()
