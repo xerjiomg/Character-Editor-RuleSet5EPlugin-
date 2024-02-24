@@ -746,6 +746,8 @@ Public Class Form1
                     lbc.ClearSelected()
                 End If
             Next
+            lb_Skill.SelectedItems.Clear()
+            lb_Saves.SelectedItems.Clear()
 
         Catch ex As Exception
 
@@ -1023,7 +1025,12 @@ Public Class Form1
                         Case 6
                             tempRoll.info = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
                         Case 7
-                            tempRoll.futureUse_icon = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
+                            If s_caller = "lb_Heals" Then
+                                tempRoll.menuUI = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
+                            Else
+                                tempRoll.futureUse_icon = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
+                            End If
+
                         Case 8
                             tempRoll.menuUI = dg_Rolls.Rows(e.RowIndex).Cells(1).Value
                     End Select
@@ -1342,9 +1349,7 @@ Public Class Form1
             baseroll.roll = "1D20+0"
             chara.skills.Add(baseroll)
             lb_Skill.Items.Clear()
-
             LoadSkillsList()
-
             actualizarJsonText()
         Catch ex As Exception
             MsgBox("Unexpected Error:it is recommended to save your work and restart the application." + Chr(10) + Chr(10) + "Error: [" + ex.Message + "]", MsgBoxStyle.Critical, "Character Editor (RuleSet5EPlugin)")
