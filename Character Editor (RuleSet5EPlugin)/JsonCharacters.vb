@@ -68,6 +68,7 @@ Namespace XJ
                 range = source.range
                 info = source.info
                 futureUse_icon = source.futureUse_icon
+                menuUI = source.menuUI
                 If source.link Is Nothing Then
                     link = Nothing
                 Else

@@ -480,10 +480,12 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
                 dg_Rolls.Rows.Add("Info", chara.skills(lb_Skill.SelectedItems(0).Index).info.ToString)
+                dg_Rolls.Rows.Add("futureUse_icon", chara.skills(lb_Skill.SelectedItems(0).Index).futureUse_icon.ToString)
                 dg_Rolls.Rows.Add("menuUI", chara.skills(lb_Skill.SelectedItems(0).Index).menuUI.ToString)
                 dg_Rolls.Rows(2).Visible = False
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
+                dg_Rolls.Rows(7).Visible = False
 
                 checkProficencyEvent = False
 
@@ -540,10 +542,12 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
                 dg_Rolls.Rows.Add("Info", chara.saves(lb_Saves.SelectedItems(0).Index).info.ToString)
+                dg_Rolls.Rows.Add("futureUse_icon", chara.saves(lb_Saves.SelectedItems(0).Index).futureUse_icon.ToString)
                 dg_Rolls.Rows.Add("menuUI", chara.saves(lb_Saves.SelectedItems(0).Index).menuUI.ToString)
                 dg_Rolls.Rows(2).Visible = False
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
+                dg_Rolls.Rows(7).Visible = False
 
                 checkProficencyEvent = False
                 If chara.saves(lb_Saves.SelectedItems(0).Index).roll.Contains("{pb}") Then
@@ -1169,15 +1173,15 @@ Public Class Form1
                             End If
                         Case 3
                             Dim s_validrol As String = isValidrole(dg_Damages.Rows(e.RowIndex).Cells(1).Value.ToString)
-                            If s_validrol = "" Then
-                                templink.roll = dg_Damages.Rows(e.RowIndex).Cells(1).Value
-                            Else
-                                avoidmakechangesDamageGrids = True
-                                dg_Damages.Rows(e.RowIndex).Cells(1).Value = dg_Damages.Tag
-                                avoidmakechangesDamageGrids = False
-                                MsgBox(s_validrol, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
-                            End If
-                        Case 6
+                            'If s_validrol = "" Then
+                            templink.roll = dg_Damages.Rows(e.RowIndex).Cells(1).Value
+                            'Else
+                            '    avoidmakechangesDamageGrids = True
+                            '    dg_Damages.Rows(e.RowIndex).Cells(1).Value = dg_Damages.Tag
+                            '    avoidmakechangesDamageGrids = False
+                            '    MsgBox(s_validrol, MsgBoxStyle.Exclamation, "Character Editor (RuleSet5EPlugin)")
+                            'End If
+                                Case 6
                             templink.info = dg_Damages.Rows(e.RowIndex).Cells(1).Value
                     End Select
 
