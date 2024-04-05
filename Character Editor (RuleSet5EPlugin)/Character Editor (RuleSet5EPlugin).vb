@@ -716,9 +716,11 @@ Public Class Form1
                 dg_Rolls.Rows.Add("Crit Multiplier", "")
                 dg_Rolls.Rows.Add("Crit Range Min", "")
                 dg_Rolls.Rows.Add("Info", chara.healing(lb_Heals.SelectedIndex).info.ToString)
+                dg_Rolls.Rows.Add("futureUse_icon", chara.healing(lb_Heals.SelectedIndex).futureUse_icon.ToString)
                 dg_Rolls.Rows.Add("menuUI", chara.healing(lb_Heals.SelectedIndex).menuUI.ToString)
                 dg_Rolls.Rows(4).Visible = False
                 dg_Rolls.Rows(5).Visible = False
+                dg_Rolls.Rows(7).Visible = False
                 If dg_Rolls.Rows(2).Cells(1).Value = "" Then
                     dg_Rolls.Rows(2).Cells(1).Value = "5/5"
                 End If
